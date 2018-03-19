@@ -1,0 +1,268 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="GastosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cuentas">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="SaldoInicial" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Estado" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Movimientos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FechaMovimiento" Type="smalldatetime" Nullable="false" />
+          <Property Name="IdTransaccion" Type="int" Nullable="false" />
+          <Property Name="IdCuenta" Type="int" Nullable="false" />
+          <Property Name="Importe" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Rubros">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Transacciones">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdRubro" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="EsDebito" Type="bit" Nullable="false" />
+          <Property Name="Estado" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Movimientos_Cuentas">
+          <End Role="Cuentas" Type="Self.Cuentas" Multiplicity="1" />
+          <End Role="Movimientos" Type="Self.Movimientos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cuentas">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Movimientos">
+              <PropertyRef Name="IdCuenta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Movimientos_Transacciones">
+          <End Role="Transacciones" Type="Self.Transacciones" Multiplicity="1" />
+          <End Role="Movimientos" Type="Self.Movimientos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Transacciones">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Movimientos">
+              <PropertyRef Name="IdTransaccion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transacciones_Rubros">
+          <End Role="Rubros" Type="Self.Rubros" Multiplicity="1" />
+          <End Role="Transacciones" Type="Self.Transacciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rubros">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Transacciones">
+              <PropertyRef Name="IdRubro" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GastosModelStoreContainer">
+          <EntitySet Name="Cuentas" EntityType="Self.Cuentas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Movimientos" EntityType="Self.Movimientos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rubros" EntityType="Self.Rubros" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Transacciones" EntityType="Self.Transacciones" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Movimientos_Cuentas" Association="Self.FK_Movimientos_Cuentas">
+            <End Role="Cuentas" EntitySet="Cuentas" />
+            <End Role="Movimientos" EntitySet="Movimientos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Movimientos_Transacciones" Association="Self.FK_Movimientos_Transacciones">
+            <End Role="Transacciones" EntitySet="Transacciones" />
+            <End Role="Movimientos" EntitySet="Movimientos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transacciones_Rubros" Association="Self.FK_Transacciones_Rubros">
+            <End Role="Rubros" EntitySet="Rubros" />
+            <End Role="Transacciones" EntitySet="Transacciones" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GastosModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Cuenta">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SaldoInicial" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Estado" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="Movimientos" Relationship="Self.FK_Movimientos_Cuentas" FromRole="Cuentas" ToRole="Movimientos" />
+        </EntityType>
+        <EntityType Name="Movimiento">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FechaMovimiento" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="IdTransaccion" Type="Int32" Nullable="false" />
+          <Property Name="IdCuenta" Type="Int32" Nullable="false" />
+          <Property Name="Importe" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <NavigationProperty Name="Cuenta" Relationship="Self.FK_Movimientos_Cuentas" FromRole="Movimientos" ToRole="Cuentas" />
+          <NavigationProperty Name="Transaccione" Relationship="Self.FK_Movimientos_Transacciones" FromRole="Movimientos" ToRole="Transacciones" />
+        </EntityType>
+        <EntityType Name="Rubro">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Transacciones" Relationship="Self.FK_Transacciones_Rubros" FromRole="Rubros" ToRole="Transacciones" />
+        </EntityType>
+        <EntityType Name="Transaccion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdRubro" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EsDebito" Type="Boolean" Nullable="false" />
+          <Property Name="Estado" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="Movimientos" Relationship="Self.FK_Movimientos_Transacciones" FromRole="Transacciones" ToRole="Movimientos" />
+          <NavigationProperty Name="Rubro" Relationship="Self.FK_Transacciones_Rubros" FromRole="Transacciones" ToRole="Rubros" />
+        </EntityType>
+        <Association Name="FK_Movimientos_Cuentas">
+          <End Role="Cuentas" Type="Self.Cuenta" Multiplicity="1" />
+          <End Role="Movimientos" Type="Self.Movimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cuentas">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Movimientos">
+              <PropertyRef Name="IdCuenta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Movimientos_Transacciones">
+          <End Role="Transacciones" Type="GastosModel.Transaccion" Multiplicity="1" />
+          <End Role="Movimientos" Type="Self.Movimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Transacciones">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Movimientos">
+              <PropertyRef Name="IdTransaccion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transacciones_Rubros">
+          <End Role="Rubros" Type="Self.Rubro" Multiplicity="1" />
+          <End Role="Transacciones" Type="GastosModel.Transaccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rubros">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Transacciones">
+              <PropertyRef Name="IdRubro" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GastosEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Cuentas" EntityType="Self.Cuenta" />
+          <EntitySet Name="Movimientos" EntityType="Self.Movimiento" />
+          <EntitySet Name="Rubros" EntityType="Self.Rubro" />
+          <EntitySet Name="Transacciones" EntityType="GastosModel.Transaccion" />
+          <AssociationSet Name="FK_Movimientos_Cuentas" Association="Self.FK_Movimientos_Cuentas">
+            <End Role="Cuentas" EntitySet="Cuentas" />
+            <End Role="Movimientos" EntitySet="Movimientos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Movimientos_Transacciones" Association="Self.FK_Movimientos_Transacciones">
+            <End Role="Transacciones" EntitySet="Transacciones" />
+            <End Role="Movimientos" EntitySet="Movimientos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transacciones_Rubros" Association="Self.FK_Transacciones_Rubros">
+            <End Role="Rubros" EntitySet="Rubros" />
+            <End Role="Transacciones" EntitySet="Transacciones" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="GastosModelStoreContainer" CdmEntityContainer="GastosEntities">
+          <EntitySetMapping Name="Cuentas">
+            <EntityTypeMapping TypeName="GastosModel.Cuenta">
+              <MappingFragment StoreEntitySet="Cuentas">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="SaldoInicial" ColumnName="SaldoInicial" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Movimientos">
+            <EntityTypeMapping TypeName="GastosModel.Movimiento">
+              <MappingFragment StoreEntitySet="Movimientos">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FechaMovimiento" ColumnName="FechaMovimiento" />
+                <ScalarProperty Name="IdTransaccion" ColumnName="IdTransaccion" />
+                <ScalarProperty Name="IdCuenta" ColumnName="IdCuenta" />
+                <ScalarProperty Name="Importe" ColumnName="Importe" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rubros">
+            <EntityTypeMapping TypeName="GastosModel.Rubro">
+              <MappingFragment StoreEntitySet="Rubros">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Transacciones">
+            <EntityTypeMapping TypeName="GastosModel.Transaccion">
+              <MappingFragment StoreEntitySet="Transacciones">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdRubro" ColumnName="IdRubro" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="EsDebito" ColumnName="EsDebito" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
