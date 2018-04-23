@@ -53,7 +53,13 @@ namespace Finanzas.Forms
                                 Saldo = 0
                             };
                 //query.ToList();
-                dgvMovimientos.DataSource = query.ToList();
+                ComponentModel.SortableBindingList<Models.ViewModels.Movimiento> movs = new ComponentModel.SortableBindingList<Models.ViewModels.Movimiento>();
+                foreach (var item in query)
+                {
+                    movs.Add(item);
+                }
+                //dgvMovimientos.DataSource = query.ToList();
+                dgvMovimientos.DataSource = movs;
             }
         }
 
@@ -109,6 +115,18 @@ namespace Finanzas.Forms
         private void btnSalir_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void dgvMovimientos_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+        {
+            //if (Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[7].Text) < Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[10].Text))
+            //{
+            //    dataGridView1.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.Beige;
+            //}
+            if (e.RowIndex % 2 == 0)
+            {
+                dgvMovimientos.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.AliceBlue;
+            }
         }
     }
 }

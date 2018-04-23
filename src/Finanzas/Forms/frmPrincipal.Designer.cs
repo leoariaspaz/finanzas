@@ -34,7 +34,7 @@
             this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ediciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rubrosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.bevel1 = new FreeFlow.WinFormsControls.Bevel();
+            this.bevel1 = new CustomLibrary.Forms.Bevel();
             this.consultarMovimientosToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -128,7 +128,7 @@
         private System.Windows.Forms.ToolStripMenuItem salirToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ediciónToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem rubrosToolStripMenuItem;
-        private FreeFlow.WinFormsControls.Bevel bevel1;
+        private CustomLibrary.Forms.Bevel bevel1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem consultarMovimientosToolStripMenuItem1;
     }
