@@ -30,6 +30,7 @@
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.dgvDatos = new System.Windows.Forms.DataGridView();
+            this.userControl11 = new Finanzas.UserControl1();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).BeginInit();
             this.SuspendLayout();
@@ -39,12 +40,13 @@
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.Controls.Add(this.dgvDatos, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.userControl11, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 3;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.16751F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 88.83249F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.614213F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 92.38579F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(566, 415);
             this.tableLayoutPanel1.TabIndex = 0;
@@ -53,10 +55,17 @@
             // 
             this.dgvDatos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDatos.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvDatos.Location = new System.Drawing.Point(3, 47);
+            this.dgvDatos.Location = new System.Drawing.Point(3, 33);
             this.dgvDatos.Name = "dgvDatos";
-            this.dgvDatos.Size = new System.Drawing.Size(560, 344);
+            this.dgvDatos.Size = new System.Drawing.Size(560, 358);
             this.dgvDatos.TabIndex = 0;
+            // 
+            // userControl11
+            // 
+            this.userControl11.Location = new System.Drawing.Point(3, 3);
+            this.userControl11.Name = "userControl11";
+            this.userControl11.Size = new System.Drawing.Size(558, 24);
+            this.userControl11.TabIndex = 1;
             // 
             // frmEditarRubros
             // 
@@ -77,5 +86,6 @@
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.DataGridView dgvDatos;
+        private UserControl1 userControl11;
     }
 }
