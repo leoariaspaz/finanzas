@@ -99,6 +99,7 @@
             // 
             this.dgvMovimientos.AllowUserToAddRows = false;
             this.dgvMovimientos.AllowUserToDeleteRows = false;
+            this.dgvMovimientos.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvMovimientos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvMovimientos.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvMovimientos.Location = new System.Drawing.Point(3, 53);

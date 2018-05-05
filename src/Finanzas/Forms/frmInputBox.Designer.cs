@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.lblCaption = new System.Windows.Forms.Label();
-            this.txtInput = new System.Windows.Forms.TextBox();
-            this.btnAceptar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
+            this.btnAceptar = new System.Windows.Forms.Button();
+            this.txtInput = new System.Windows.Forms.TextBox();
+            this.lblCaption = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -48,21 +48,16 @@
             this.panel1.Size = new System.Drawing.Size(284, 89);
             this.panel1.TabIndex = 0;
             // 
-            // lblCaption
+            // btnCancelar
             // 
-            this.lblCaption.AutoSize = true;
-            this.lblCaption.Location = new System.Drawing.Point(12, 9);
-            this.lblCaption.Name = "lblCaption";
-            this.lblCaption.Size = new System.Drawing.Size(35, 13);
-            this.lblCaption.TabIndex = 0;
-            this.lblCaption.Text = "label1";
-            // 
-            // txtInput
-            // 
-            this.txtInput.Location = new System.Drawing.Point(12, 25);
-            this.txtInput.Name = "txtInput";
-            this.txtInput.Size = new System.Drawing.Size(260, 20);
-            this.txtInput.TabIndex = 1;
+            this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCancelar.Location = new System.Drawing.Point(145, 59);
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Size = new System.Drawing.Size(75, 23);
+            this.btnCancelar.TabIndex = 3;
+            this.btnCancelar.Text = "Cancelar";
+            this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // btnAceptar
             // 
@@ -74,20 +69,28 @@
             this.btnAceptar.UseVisualStyleBackColor = true;
             this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
             // 
-            // btnCancelar
+            // txtInput
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(145, 59);
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(75, 23);
-            this.btnCancelar.TabIndex = 3;
-            this.btnCancelar.Text = "Cancelar";
-            this.btnCancelar.UseVisualStyleBackColor = true;
-            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
+            this.txtInput.Location = new System.Drawing.Point(12, 25);
+            this.txtInput.Name = "txtInput";
+            this.txtInput.Size = new System.Drawing.Size(260, 20);
+            this.txtInput.TabIndex = 1;
+            // 
+            // lblCaption
+            // 
+            this.lblCaption.AutoSize = true;
+            this.lblCaption.Location = new System.Drawing.Point(12, 9);
+            this.lblCaption.Name = "lblCaption";
+            this.lblCaption.Size = new System.Drawing.Size(35, 13);
+            this.lblCaption.TabIndex = 0;
+            this.lblCaption.Text = "label1";
             // 
             // frmInputBox
             // 
+            this.AcceptButton = this.btnAceptar;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btnCancelar;
             this.ClientSize = new System.Drawing.Size(284, 89);
             this.Controls.Add(this.panel1);
             this.MaximizeBox = false;

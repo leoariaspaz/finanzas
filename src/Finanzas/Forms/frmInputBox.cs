@@ -17,10 +17,12 @@ namespace Finanzas.Forms
             InitializeComponent();
         }
 
-        public frmInputBox(string formTitle, string caption) : this()
+        public frmInputBox(string formTitle, string caption, string value = "") : this()
         {
             this.Text = formTitle;
             lblCaption.Text = caption;
+            this.Value = value;
+            txtInput.Text = this.Value;
         }
 
         public string Value { get; private set; }
