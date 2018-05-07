@@ -24,12 +24,17 @@ namespace Finanzas.Forms
 
         private void rubrosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new frmEditarRubros().ShowDialog();
+            using (var f = new frmEditarRubros()) f.ShowDialog();
         }
 
         private void consultarMovimientosToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            new frmConsultaMovimientos().ShowDialog();
+            using (var f = new frmConsultaMovimientos()) f.ShowDialog();
+        }
+
+        private void transaccionesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var f = new frmEditarTransacciones()) f.ShowDialog();
         }
     }
 }

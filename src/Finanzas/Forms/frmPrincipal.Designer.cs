@@ -30,12 +30,13 @@
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.consultarMovimientosToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ediciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rubrosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bevel1 = new CustomLibrary.Forms.Bevel();
-            this.consultarMovimientosToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.transaccionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -60,6 +61,13 @@
             this.archivoToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
             this.archivoToolStripMenuItem.Text = "Archivo";
             // 
+            // consultarMovimientosToolStripMenuItem1
+            // 
+            this.consultarMovimientosToolStripMenuItem1.Name = "consultarMovimientosToolStripMenuItem1";
+            this.consultarMovimientosToolStripMenuItem1.Size = new System.Drawing.Size(198, 22);
+            this.consultarMovimientosToolStripMenuItem1.Text = "Consultar Movimientos";
+            this.consultarMovimientosToolStripMenuItem1.Click += new System.EventHandler(this.consultarMovimientosToolStripMenuItem1_Click);
+            // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
@@ -75,7 +83,8 @@
             // ediciónToolStripMenuItem
             // 
             this.ediciónToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.rubrosToolStripMenuItem});
+            this.rubrosToolStripMenuItem,
+            this.transaccionesToolStripMenuItem});
             this.ediciónToolStripMenuItem.Name = "ediciónToolStripMenuItem";
             this.ediciónToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
             this.ediciónToolStripMenuItem.Text = "Edición";
@@ -83,25 +92,29 @@
             // rubrosToolStripMenuItem
             // 
             this.rubrosToolStripMenuItem.Name = "rubrosToolStripMenuItem";
-            this.rubrosToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
+            this.rubrosToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.rubrosToolStripMenuItem.Text = "Rubros";
             this.rubrosToolStripMenuItem.Click += new System.EventHandler(this.rubrosToolStripMenuItem_Click);
             // 
             // bevel1
             // 
+            this.bevel1.BevelStyle = CustomLibrary.Forms.BevelStyle.Lowered;
+            this.bevel1.BevelType = CustomLibrary.Forms.BevelType.Box;
             this.bevel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.bevel1.HighlightColor = System.Drawing.SystemColors.ButtonHighlight;
             this.bevel1.Location = new System.Drawing.Point(0, 24);
             this.bevel1.Name = "bevel1";
+            this.bevel1.ShadowColor = System.Drawing.SystemColors.ButtonShadow;
             this.bevel1.Size = new System.Drawing.Size(586, 2);
             this.bevel1.TabIndex = 1;
             this.bevel1.Text = "bevel1";
             // 
-            // consultarMovimientosToolStripMenuItem1
+            // transaccionesToolStripMenuItem
             // 
-            this.consultarMovimientosToolStripMenuItem1.Name = "consultarMovimientosToolStripMenuItem1";
-            this.consultarMovimientosToolStripMenuItem1.Size = new System.Drawing.Size(198, 22);
-            this.consultarMovimientosToolStripMenuItem1.Text = "Consultar Movimientos";
-            this.consultarMovimientosToolStripMenuItem1.Click += new System.EventHandler(this.consultarMovimientosToolStripMenuItem1_Click);
+            this.transaccionesToolStripMenuItem.Name = "transaccionesToolStripMenuItem";
+            this.transaccionesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.transaccionesToolStripMenuItem.Text = "Transacciones";
+            this.transaccionesToolStripMenuItem.Click += new System.EventHandler(this.transaccionesToolStripMenuItem_Click);
             // 
             // frmPrincipal
             // 
@@ -131,5 +144,6 @@
         private CustomLibrary.Forms.Bevel bevel1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem consultarMovimientosToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem transaccionesToolStripMenuItem;
     }
 }
