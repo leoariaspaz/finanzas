@@ -36,5 +36,10 @@ namespace Finanzas.Forms
         {
             using (var f = new Transacciones.frmListado()) f.ShowDialog();
         }
+
+        private void cuentasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var f = new frmEditarCuentas()) f.ShowDialog();
+        }
     }
 }
