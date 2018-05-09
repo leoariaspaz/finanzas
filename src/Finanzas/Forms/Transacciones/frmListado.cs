@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Finanzas.Lib.Extensions;
 
 namespace Finanzas.Forms.Transacciones
 {
@@ -109,11 +110,25 @@ namespace Finanzas.Forms.Transacciones
 
         private void btnNuevo_Click(object sender, EventArgs e)
         {
-            using (var f = new frmEdición())
+            var trx = new Transaccion();
+            trx.Rubro = (Rubro)cbRubros.SelectedItem;
+            using (var f = new frmEdición(trx))
             {
                 if (f.ShowDialog() == DialogResult.OK)
                 {
-
+                    using (var db = new GastosEntities())
+                    {
+                        trx.Descripcion = f.Descripción;
+                        trx.EsDebito = f.EsDébito;
+                        trx.Estado = f.Estado;
+                        trx.IdRubro = f.IdRubro;
+                        trx.Rubro = null;
+                        db.Transacciones.Add(trx);
+                        db.SaveChanges();
+                        cbRubros.SelectedValue = f.IdRubro;
+                        ConsultarDatos();
+                        dgvDatos.Posicionar(r => r.Cells[1].Value.ToString() == trx.Descripcion);
+                    }
                 }
             }
         }
@@ -121,7 +136,7 @@ namespace Finanzas.Forms.Transacciones
         private void btnEditar_Click(object sender, EventArgs e)
         {
             int rowindex = dgvDatos.CurrentCell.RowIndex;
-            var id = (int) dgvDatos.Rows[rowindex].Cells[0].Value;
+            var id = (int)dgvDatos.Rows[rowindex].Cells[0].Value;
             using (var db = new GastosEntities())
             {
                 var trx = db.Transacciones.Find(id);
@@ -129,8 +144,38 @@ namespace Finanzas.Forms.Transacciones
                 {
                     if (f.ShowDialog() == DialogResult.OK)
                     {
-
+                        trx.Descripcion = f.Descripción;
+                        trx.EsDebito = f.EsDébito;
+                        trx.Estado = f.Estado;
+                        trx.IdRubro = f.IdRubro;
+                        db.SaveChanges();
+                        cbRubros.SelectedValue = f.IdRubro;
+                        ConsultarDatos();
+                        dgvDatos.Posicionar(r => Int32.Parse(r.Cells[0].Value.ToString()) == trx.Id);
                     }
+                }
+            }
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            using (var db = new GastosEntities())
+            {
+                int rowindex = dgvDatos.CurrentCell.RowIndex;
+                int id = (int)dgvDatos.Rows[rowindex].Cells[0].Value;
+                var trx = db.Transacciones.FirstOrDefault(t => t.Id == id);
+                if (MessageBox.Show(String.Format("¿Está seguro de que desea eliminar {0}?", trx.Descripcion),
+                    "Eliminar transacción", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+                {
+                    if (trx.Movimientos.Any())
+                    {
+                        MessageBox.Show("No se puede eliminar esta transacción: tiene transacciones relacionadas.", "Error",
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    db.Transacciones.Remove(trx);
+                    db.SaveChanges();
+                    ConsultarDatos();
                 }
             }
         }
