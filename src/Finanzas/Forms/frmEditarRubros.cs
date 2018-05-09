@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Finanzas.Lib.Extensions;
 
 namespace Finanzas.Forms
 {
@@ -59,7 +60,7 @@ namespace Finanzas.Forms
                             db.SaveChanges();
                         }
                         ConsultarDatos();
-                        Posicionar(v);
+                        dgvDatos.Posicionar(r => r.Cells[1].Value.ToString().Equals(v));
                         salir = true;
                     }
                 }
@@ -90,7 +91,7 @@ namespace Finanzas.Forms
                             db.SaveChanges();
                         }
                         ConsultarDatos();
-                        Posicionar(v);
+                        dgvDatos.Posicionar(r => r.Cells[1].Value.ToString().Equals(v));
                         salir = true;
                     }
                 }
@@ -99,21 +100,6 @@ namespace Finanzas.Forms
                     salir = true;
                 }
             }
-        }
-
-        private void Posicionar(string descripción)
-        {
-            int rowIndex = -1;
-            foreach (DataGridViewRow row in dgvDatos.Rows)
-            {
-                if (row.Cells[1].Value.ToString().Equals(descripción))
-                {
-                    rowIndex = row.Index;
-                    break;
-                }
-            }
-            //dgvDatos.Rows[rowIndex].Selected = true;
-            dgvDatos.CurrentCell = dgvDatos.Rows[rowIndex].Cells[0];
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)

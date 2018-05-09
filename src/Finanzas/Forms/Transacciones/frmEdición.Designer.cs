@@ -30,15 +30,15 @@
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btnAceptar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
+            this.btnAceptar = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.ckEsDébito = new System.Windows.Forms.CheckBox();
-            this.txtRubro = new System.Windows.Forms.TextBox();
-            this.txtDescripción = new System.Windows.Forms.TextBox();
             this.ckHabilitada = new System.Windows.Forms.CheckBox();
+            this.txtDescripción = new System.Windows.Forms.TextBox();
+            this.ckEsDébito = new System.Windows.Forms.CheckBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.cbRubros = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -69,15 +69,6 @@
             this.panel1.Size = new System.Drawing.Size(384, 29);
             this.panel1.TabIndex = 0;
             // 
-            // btnAceptar
-            // 
-            this.btnAceptar.Location = new System.Drawing.Point(219, 3);
-            this.btnAceptar.Name = "btnAceptar";
-            this.btnAceptar.Size = new System.Drawing.Size(75, 23);
-            this.btnAceptar.TabIndex = 0;
-            this.btnAceptar.Text = "&Grabar";
-            this.btnAceptar.UseVisualStyleBackColor = true;
-            // 
             // btnCancelar
             // 
             this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
@@ -88,11 +79,21 @@
             this.btnCancelar.Text = "&Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
             // 
+            // btnAceptar
+            // 
+            this.btnAceptar.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.btnAceptar.Location = new System.Drawing.Point(219, 3);
+            this.btnAceptar.Name = "btnAceptar";
+            this.btnAceptar.Size = new System.Drawing.Size(75, 23);
+            this.btnAceptar.TabIndex = 0;
+            this.btnAceptar.Text = "&Grabar";
+            this.btnAceptar.UseVisualStyleBackColor = true;
+            // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.cbRubros);
             this.panel2.Controls.Add(this.ckHabilitada);
             this.panel2.Controls.Add(this.txtDescripción);
-            this.panel2.Controls.Add(this.txtRubro);
             this.panel2.Controls.Add(this.ckEsDébito);
             this.panel2.Controls.Add(this.label2);
             this.panel2.Controls.Add(this.label1);
@@ -102,14 +103,32 @@
             this.panel2.Size = new System.Drawing.Size(384, 106);
             this.panel2.TabIndex = 1;
             // 
-            // label1
+            // ckHabilitada
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(36, 13);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(42, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Rubro: ";
+            this.ckHabilitada.AutoSize = true;
+            this.ckHabilitada.Location = new System.Drawing.Point(99, 84);
+            this.ckHabilitada.Name = "ckHabilitada";
+            this.ckHabilitada.Size = new System.Drawing.Size(73, 17);
+            this.ckHabilitada.TabIndex = 2;
+            this.ckHabilitada.Text = "Habilitada";
+            this.ckHabilitada.UseVisualStyleBackColor = true;
+            // 
+            // txtDescripción
+            // 
+            this.txtDescripción.Location = new System.Drawing.Point(99, 35);
+            this.txtDescripción.Name = "txtDescripción";
+            this.txtDescripción.Size = new System.Drawing.Size(261, 20);
+            this.txtDescripción.TabIndex = 0;
+            // 
+            // ckEsDébito
+            // 
+            this.ckEsDébito.AutoSize = true;
+            this.ckEsDébito.Location = new System.Drawing.Point(99, 61);
+            this.ckEsDébito.Name = "ckEsDébito";
+            this.ckEsDébito.Size = new System.Drawing.Size(164, 17);
+            this.ckEsDébito.TabIndex = 1;
+            this.ckEsDébito.Text = "Es una transacción de débito";
+            this.ckEsDébito.UseVisualStyleBackColor = true;
             // 
             // label2
             // 
@@ -120,40 +139,23 @@
             this.label2.TabIndex = 1;
             this.label2.Text = "Descripción: ";
             // 
-            // ckEsDébito
+            // label1
             // 
-            this.ckEsDébito.AutoSize = true;
-            this.ckEsDébito.Location = new System.Drawing.Point(99, 61);
-            this.ckEsDébito.Name = "ckEsDébito";
-            this.ckEsDébito.Size = new System.Drawing.Size(164, 17);
-            this.ckEsDébito.TabIndex = 4;
-            this.ckEsDébito.Text = "Es una transacción de débito";
-            this.ckEsDébito.UseVisualStyleBackColor = true;
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(36, 13);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(42, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Rubro: ";
             // 
-            // txtRubro
+            // cbRubros
             // 
-            this.txtRubro.Location = new System.Drawing.Point(99, 9);
-            this.txtRubro.Name = "txtRubro";
-            this.txtRubro.ReadOnly = true;
-            this.txtRubro.Size = new System.Drawing.Size(261, 20);
-            this.txtRubro.TabIndex = 5;
-            // 
-            // txtDescripción
-            // 
-            this.txtDescripción.Location = new System.Drawing.Point(99, 35);
-            this.txtDescripción.Name = "txtDescripción";
-            this.txtDescripción.Size = new System.Drawing.Size(261, 20);
-            this.txtDescripción.TabIndex = 6;
-            // 
-            // ckHabilitada
-            // 
-            this.ckHabilitada.AutoSize = true;
-            this.ckHabilitada.Location = new System.Drawing.Point(99, 84);
-            this.ckHabilitada.Name = "ckHabilitada";
-            this.ckHabilitada.Size = new System.Drawing.Size(73, 17);
-            this.ckHabilitada.TabIndex = 7;
-            this.ckHabilitada.Text = "Habilitada";
-            this.ckHabilitada.UseVisualStyleBackColor = true;
+            this.cbRubros.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbRubros.FormattingEnabled = true;
+            this.cbRubros.Location = new System.Drawing.Point(99, 9);
+            this.cbRubros.Name = "cbRubros";
+            this.cbRubros.Size = new System.Drawing.Size(261, 21);
+            this.cbRubros.TabIndex = 6;
             // 
             // frmEdición
             // 
@@ -184,7 +186,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckBox ckHabilitada;
         private System.Windows.Forms.TextBox txtDescripción;
-        private System.Windows.Forms.TextBox txtRubro;
         private System.Windows.Forms.CheckBox ckEsDébito;
+        private System.Windows.Forms.ComboBox cbRubros;
     }
 }
