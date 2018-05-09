@@ -74,12 +74,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Forms\frmEditarCuentas.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\frmEditarCuentas.Designer.cs">
-      <DependentUpon>frmEditarCuentas.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\frmEditarRubros.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -116,7 +110,6 @@
     <Compile Include="Forms\frmConsultaMovimientos.Designer.cs">
       <DependentUpon>frmConsultaMovimientos.cs</DependentUpon>
     </Compile>
-    <Compile Include="Lib\Extensions\DataGridViewExtensions.cs" />
     <Compile Include="Models\Cuenta.cs">
       <DependentUpon>Finanzas.tt</DependentUpon>
     </Compile>
@@ -149,9 +142,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\frmConsultaMovimientos.resx">
       <DependentUpon>frmConsultaMovimientos.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\frmEditarCuentas.resx">
-      <DependentUpon>frmEditarCuentas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmEditarRubros.resx">
       <DependentUpon>frmEditarRubros.cs</DependentUpon>
