@@ -34,7 +34,7 @@ namespace Finanzas.Forms
 
         private void transaccionesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (var f = new frmEditarTransacciones()) f.ShowDialog();
+            using (var f = new Transacciones.frmListado()) f.ShowDialog();
         }
     }
 }

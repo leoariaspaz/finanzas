@@ -63,6 +63,10 @@ namespace Finanzas.Forms
                         salir = true;
                     }
                 }
+                else
+                {
+                    salir = true;
+                }
             }
         }
 
@@ -70,7 +74,7 @@ namespace Finanzas.Forms
         {
             int rowindex = dgvDatos.CurrentCell.RowIndex;
             string rubro = dgvDatos.Rows[rowindex].Cells[1].Value.ToString();
-            var f = new frmInputBox("Nuevo rubro", "Descripción:", rubro);
+            var f = new frmInputBox("Edición de rubro", "Descripción:", rubro);
             bool salir = false;
             while (!salir)
             {
@@ -89,6 +93,10 @@ namespace Finanzas.Forms
                         Posicionar(v);
                         salir = true;
                     }
+                }
+                else
+                {
+                    salir = true;
                 }
             }
         }
@@ -155,6 +163,14 @@ namespace Finanzas.Forms
             dgvDatos.Columns[1].HeaderText = "Descripción";
             dgvDatos.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dgvDatos.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+        }
+
+        private void frmEditarRubros_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape) btnSalir.PerformClick();
+            else if (e.Control && e.KeyCode == Keys.N) btnNuevo.PerformClick();
+            else if (e.Control && e.KeyCode == Keys.F4) btnEditar.PerformClick();
+            else if (e.Control && e.KeyCode == Keys.Delete) btnEliminar.PerformClick();
         }
     }
 }
