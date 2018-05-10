@@ -35,6 +35,7 @@
             this.txtInput = new System.Windows.Forms.TextBox();
             this.lblCaption = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
@@ -79,6 +80,7 @@
             this.txtInput.Size = new System.Drawing.Size(260, 20);
             this.txtInput.TabIndex = 1;
             this.txtInput.Validating += new System.ComponentModel.CancelEventHandler(this.txtInput_Validating);
+            this.txtInput.Validated += new System.EventHandler(this.txtInput_Validated);
             // 
             // lblCaption
             // 
@@ -92,6 +94,12 @@
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
+            // 
+            // toolTip1
+            // 
+            this.toolTip1.IsBalloon = true;
+            this.toolTip1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Error;
+            this.toolTip1.ToolTipTitle = "Error";
             // 
             // frmInputBox
             // 
@@ -122,5 +130,6 @@
         private System.Windows.Forms.TextBox txtInput;
         private System.Windows.Forms.Label lblCaption;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

@@ -71,7 +71,7 @@ namespace Finanzas.Forms
             //}
 
             var f = new frmInputBox("Nuevo rubro", "Descripción:");
-            f.AllowEmpty = false;
+            f.AllowEmptyValue = false;
             if (f.ShowDialog() == DialogResult.OK)
             {
                 string v = f.Value.Trim();
@@ -97,28 +97,20 @@ namespace Finanzas.Forms
             int rowindex = dgvDatos.CurrentCell.RowIndex;
             string rubro = dgvDatos.Rows[rowindex].Cells[1].Value.ToString();
             var f = new frmInputBox("Edición de rubro", "Descripción:", rubro);
-            bool salir = false;
-            while (!salir)
+            f.AllowEmptyValue = false;
+            if (f.ShowDialog() == DialogResult.OK)
             {
-                if (f.ShowDialog() == DialogResult.OK)
+                string v = f.Value.Trim();
+                if (!String.IsNullOrEmpty(v))
                 {
-                    string v = f.Value.Trim();
-                    if (!String.IsNullOrEmpty(v))
+                    using (var db = new GastosEntities())
                     {
-                        using (var db = new GastosEntities())
-                        {
-                            var r = db.Rubros.FirstOrDefault(r1 => r1.Descripcion == rubro);
-                            r.Descripcion = v;
-                            db.SaveChanges();
-                        }
-                        ConsultarDatos();
-                        dgvDatos.Posicionar(r => r.Cells[1].Value.ToString().Equals(v));
-                        salir = true;
+                        var r = db.Rubros.FirstOrDefault(r1 => r1.Descripcion == rubro);
+                        r.Descripcion = v;
+                        db.SaveChanges();
                     }
-                }
-                else
-                {
-                    salir = true;
+                    ConsultarDatos();
+                    dgvDatos.Posicionar(r => r.Cells[1].Value.ToString().Equals(v));
                 }
             }
         }

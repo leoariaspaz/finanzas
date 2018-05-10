@@ -15,7 +15,7 @@ namespace Finanzas.Forms
         public frmInputBox()
         {
             InitializeComponent();
-            AllowEmpty = true;
+            AllowEmptyValue = true;
         }
 
         public frmInputBox(string formTitle, string caption, string value = "") : this()
@@ -39,12 +39,11 @@ namespace Finanzas.Forms
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            if (!AllowEmpty)
+            this.DialogResult = DialogResult.None;
+            if (this.ValidateChildren())
             {
-                errorProvider1.SetError(txtInput, "No puede estar vacío.");
-                return;
+                DialogResult = DialogResult.OK;
             }
-            DialogResult = DialogResult.OK;
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -52,14 +51,23 @@ namespace Finanzas.Forms
             DialogResult = DialogResult.Cancel;
         }
 
-        public bool AllowEmpty { get; set; }
+        public bool AllowEmptyValue { get; set; }
 
         private void txtInput_Validating(object sender, CancelEventArgs e)
         {
-            //if (!AllowEmpty)
-            //{
-            //    errorProvider1.SetError(txtInput, "No puede estar vacío.");
-            //}
+            if (!AllowEmptyValue && String.IsNullOrEmpty(txtInput.Text.Trim()))
+            {
+                e.Cancel = true;
+                errorProvider1.SetError(txtInput, "No puede estar vacío.");
+                toolTip1.Show("No puede estar vacío.", this,
+                    txtInput.FindForm().PointToClient(txtInput.Parent.PointToScreen(txtInput.Location)), 3000);
+            }
+        }
+
+        private void txtInput_Validated(object sender, EventArgs e)
+        {
+            errorProvider1.SetError(txtInput, "No puede estar vacío.");
+            toolTip1.Hide(txtInput);
         }
     }
 }
