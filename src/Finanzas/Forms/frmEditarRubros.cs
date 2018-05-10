@@ -39,35 +39,56 @@ namespace Finanzas.Forms
 
         private void btnNuevo_Click(object sender, EventArgs e)
         {
+            //var f = new frmInputBox("Nuevo rubro", "Descripción:");
+            //bool salir = false;
+            //while (!salir)
+            //{
+            //    if (f.ShowDialog() == DialogResult.OK)
+            //    {
+            //        string v = f.Value.Trim();
+            //        if (!String.IsNullOrEmpty(v))
+            //        {
+            //            using (var db = new GastosEntities())
+            //            {
+            //                if (db.Rubros.Any(r => r.Descripcion == v))
+            //                {
+            //                    MessageBox.Show("Ya existe el rubro ingresado.", "Error",
+            //                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //                    continue;
+            //                }
+            //                db.Rubros.Add(new Rubro { Descripcion = v });
+            //                db.SaveChanges();
+            //            }
+            //            ConsultarDatos();
+            //            dgvDatos.Posicionar(r => r.Cells[1].Value.ToString().Equals(v));
+            //            salir = true;
+            //        }
+            //    }
+            //    else
+            //    {
+            //        salir = true;
+            //    }
+            //}
+
             var f = new frmInputBox("Nuevo rubro", "Descripción:");
-            bool salir = false;
-            while (!salir)
+            f.AllowEmpty = false;
+            if (f.ShowDialog() == DialogResult.OK)
             {
-                if (f.ShowDialog() == DialogResult.OK)
+                string v = f.Value.Trim();
+                using (var db = new GastosEntities())
                 {
-                    string v = f.Value.Trim();
-                    if (!String.IsNullOrEmpty(v))
+                    if (db.Rubros.Any(r => r.Descripcion == v))
                     {
-                        using (var db = new GastosEntities())
-                        {
-                            if (db.Rubros.Any(r => r.Descripcion == v))
-                            {
-                                MessageBox.Show("Ya existe el rubro ingresado.", "Error",
-                                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                continue;
-                            }
-                            db.Rubros.Add(new Rubro { Descripcion = v });
-                            db.SaveChanges();
-                        }
-                        ConsultarDatos();
+                        MessageBox.Show("Ya existe el rubro ingresado.", "Error",
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
                         dgvDatos.Posicionar(r => r.Cells[1].Value.ToString().Equals(v));
-                        salir = true;
+                        return;
                     }
+                    db.Rubros.Add(new Rubro { Descripcion = v });
+                    db.SaveChanges();
                 }
-                else
-                {
-                    salir = true;
-                }
+                ConsultarDatos();
+                dgvDatos.Posicionar(r => r.Cells[1].Value.ToString().Equals(v));
             }
         }
 
