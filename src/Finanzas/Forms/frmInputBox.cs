@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Finanzas.Lib.Extensions;
 
 namespace Finanzas.Forms
 {
@@ -58,16 +59,28 @@ namespace Finanzas.Forms
             if (!AllowEmptyValue && String.IsNullOrEmpty(txtInput.Text.Trim()))
             {
                 e.Cancel = true;
-                errorProvider1.SetError(txtInput, "No puede estar vacío.");
-                toolTip1.Show("No puede estar vacío.", this,
-                    txtInput.FindForm().PointToClient(txtInput.Parent.PointToScreen(txtInput.Location)), 3000);
+                new ToolTip().Show(this, txtInput, "");
+                //PosBalloon(txtInput, "No puede estar vacío.");
             }
+        }
+
+        private void PosBalloon(TextBox textBox, string message)
+        {
+            errorProvider1.SetError(textBox, message);
+            Point p = new Point(textBox.Left + textBox.Size.Width / 2, textBox.Top + textBox.Size.Height / 2 - 20);
+            if (!textBox.Multiline) p.Y -= 25;
+            p = textBox.FindForm().PointToClient(textBox.Parent.PointToScreen(p));
+            var tt = new ToolTip();
+            tt.IsBalloon = true;
+            tt.ToolTipIcon = ToolTipIcon.Error;
+            tt.ToolTipTitle = "Error";
+            tt.Show(message, this, p, 3000);
         }
 
         private void txtInput_Validated(object sender, EventArgs e)
         {
-            errorProvider1.SetError(txtInput, "No puede estar vacío.");
-            toolTip1.Hide(txtInput);
+            errorProvider1.SetError(txtInput, "");
+            //toolTip1.Hide(txtInput);
         }
     }
 }
