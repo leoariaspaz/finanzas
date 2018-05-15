@@ -146,6 +146,7 @@
       <DependentUpon>Finanzas.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ViewModel\Movimiento.cs" />
+    <Compile Include="Models\ViewModel\NumeroValor.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\frmConsultaMovimientos.resx">

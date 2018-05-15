@@ -27,8 +27,14 @@ namespace Finanzas.Forms
                 var query = from r in db.Rubros
                             orderby r.Descripcion
                             select new { r.Id, r.Descripcion };
-                //cbCuentas.Items.AddRange(query.ToArray());
-                dgvDatos.DataSource = query.ToList();
+                //ComponentModel.SortableBindingList<Tuple<int, string>> rubros = new ComponentModel.SortableBindingList<Tuple<int, string>>();
+                //foreach (var item in query)
+                //{
+                //    rubros.Add(new Tuple<int, string>(item.Id, item.Descripcion));
+                //}
+                //dgvDatos.DataSource = rubros;
+
+                dgvDatos.DataSource = query.ToSortableBindingList(t => new Tuple<int, string>(t.Id, t.Descripcion));
             }
         }
 

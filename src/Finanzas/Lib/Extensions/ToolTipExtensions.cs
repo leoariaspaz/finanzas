@@ -8,9 +8,10 @@ using System.Windows.Forms;
 
 namespace Finanzas.Lib.Extensions
 {
-    class ToolTipExtensions
+    public static class ToolTipExtensions
     {
-        public static void Show(this ToolTip toolTip, IWin32Window window, TextBox textBox, string message)
+        public static void ShowError(this ToolTip toolTip, IWin32Window window, TextBox textBox, string message, 
+            int duration)
         {
             Point p = new Point(textBox.Left + textBox.Size.Width / 2, textBox.Top + textBox.Size.Height / 2 - 20);
             if (!textBox.Multiline) p.Y -= 25;
@@ -19,7 +20,7 @@ namespace Finanzas.Lib.Extensions
             tt.IsBalloon = true;
             tt.ToolTipIcon = ToolTipIcon.Error;
             tt.ToolTipTitle = "Error";
-            tt.Show(message, window, p, 3000);
+            tt.Show(message, window, p, duration);
         }
     }
 }

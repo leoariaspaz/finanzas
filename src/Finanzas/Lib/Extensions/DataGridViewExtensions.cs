@@ -25,5 +25,25 @@ namespace Finanzas.Lib.Extensions
                 grid.CurrentCell = grid.Rows[rowIndex].Cells[0];
             }
         }
+
+        public static ComponentModel.SortableBindingList<T> ToSortableBindingList<T, T2>(this IEnumerable<T2> query, Func<T2, T> convert)
+        {
+            ComponentModel.SortableBindingList<T> list = new ComponentModel.SortableBindingList<T>();
+            foreach (var item in query)
+            {
+                list.Add(convert(item));
+            }
+            return list;
+        }
+
+        public static ComponentModel.SortableBindingList<T> ToSortableBindingList<T>(this IEnumerable<T> query)
+        {
+            ComponentModel.SortableBindingList<T> rubros = new ComponentModel.SortableBindingList<T>();
+            foreach (var item in query)
+            {
+                rubros.Add(item);
+            }
+            return rubros;
+        }
     }
 }

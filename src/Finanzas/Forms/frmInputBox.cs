@@ -41,10 +41,26 @@ namespace Finanzas.Forms
         private void btnAceptar_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.None;
-            if (this.ValidateChildren())
+            if (this.ValidarDatos())
             {
                 DialogResult = DialogResult.OK;
             }
+        }
+
+        private bool ValidarDatos()
+        {
+            bool result = true;
+            if (!AllowEmptyValue && String.IsNullOrEmpty(txtInput.Text.Trim()))
+            {
+                errorProvider1.SetError(txtInput, "No puede estar vacío.");
+                new ToolTip().ShowError(this, txtInput, "No puede estar vacío.", 3000);
+                result = false;
+            }
+            else
+            {
+                errorProvider1.SetError(txtInput, "");
+            }
+            return result;
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -53,34 +69,5 @@ namespace Finanzas.Forms
         }
 
         public bool AllowEmptyValue { get; set; }
-
-        private void txtInput_Validating(object sender, CancelEventArgs e)
-        {
-            if (!AllowEmptyValue && String.IsNullOrEmpty(txtInput.Text.Trim()))
-            {
-                e.Cancel = true;
-                new ToolTip().Show(this, txtInput, "");
-                //PosBalloon(txtInput, "No puede estar vacío.");
-            }
-        }
-
-        private void PosBalloon(TextBox textBox, string message)
-        {
-            errorProvider1.SetError(textBox, message);
-            Point p = new Point(textBox.Left + textBox.Size.Width / 2, textBox.Top + textBox.Size.Height / 2 - 20);
-            if (!textBox.Multiline) p.Y -= 25;
-            p = textBox.FindForm().PointToClient(textBox.Parent.PointToScreen(p));
-            var tt = new ToolTip();
-            tt.IsBalloon = true;
-            tt.ToolTipIcon = ToolTipIcon.Error;
-            tt.ToolTipTitle = "Error";
-            tt.Show(message, this, p, 3000);
-        }
-
-        private void txtInput_Validated(object sender, EventArgs e)
-        {
-            errorProvider1.SetError(txtInput, "");
-            //toolTip1.Hide(txtInput);
-        }
     }
 }

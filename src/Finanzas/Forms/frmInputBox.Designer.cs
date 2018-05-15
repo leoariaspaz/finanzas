@@ -78,8 +78,6 @@
             this.txtInput.Name = "txtInput";
             this.txtInput.Size = new System.Drawing.Size(260, 20);
             this.txtInput.TabIndex = 1;
-            this.txtInput.Validating += new System.ComponentModel.CancelEventHandler(this.txtInput_Validating);
-            this.txtInput.Validated += new System.EventHandler(this.txtInput_Validated);
             // 
             // lblCaption
             // 

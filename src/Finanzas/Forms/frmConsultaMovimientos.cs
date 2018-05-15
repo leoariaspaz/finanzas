@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Finanzas.Models;
+using Finanzas.Lib.Extensions;
 
 namespace Finanzas.Forms
 {
@@ -52,14 +53,13 @@ namespace Finanzas.Forms
                                 Importe = c.Importe,
                                 Saldo = 0
                             };
-                //query.ToList();
-                ComponentModel.SortableBindingList<Models.ViewModels.Movimiento> movs = new ComponentModel.SortableBindingList<Models.ViewModels.Movimiento>();
-                foreach (var item in query)
-                {
-                    movs.Add(item);
-                }
-                //dgvMovimientos.DataSource = query.ToList();
-                dgvMovimientos.DataSource = movs;
+                //ComponentModel.SortableBindingList<Models.ViewModels.Movimiento> movs = new ComponentModel.SortableBindingList<Models.ViewModels.Movimiento>();
+                //foreach (var item in query)
+                //{
+                //    movs.Add(item);
+                //}
+                //dgvMovimientos.DataSource = movs;
+                dgvMovimientos.DataSource = query.ToSortableBindingList();
             }
         }
 
