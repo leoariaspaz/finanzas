@@ -117,6 +117,7 @@
       <DependentUpon>frmConsultaMovimientos.cs</DependentUpon>
     </Compile>
     <Compile Include="Lib\Extensions\DataGridViewExtensions.cs" />
+    <Compile Include="Lib\Extensions\ToolTipExtensions.cs" />
     <Compile Include="Models\Cuenta.cs">
       <DependentUpon>Finanzas.tt</DependentUpon>
     </Compile>
