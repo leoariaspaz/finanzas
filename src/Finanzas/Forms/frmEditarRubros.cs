@@ -19,13 +19,7 @@ namespace Finanzas.Forms
 
         private void ConsultarDatos()
         {
-            using (var db = new GastosEntities())
-            {
-                var query = from r in db.Rubros
-                            orderby r.Descripcion
-                            select new { r.Id, r.Descripcion };
-                dgvDatos.DataSource = query.ToSortableBindingList(t => new Tuple<int, string>(t.Id, t.Descripcion));
-            }
+            dgvDatos.DataSource = RubrosRepository.ObtenerRubros().ToSortableBindingList(t => new Tuple<int, string>(t.Id, t.Descripcion));
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
@@ -35,21 +29,23 @@ namespace Finanzas.Forms
 
         private void btnNuevo_Click(object sender, EventArgs e)
         {
-            var f = new frmInputBox("Nuevo rubro", "Descripción:");
-            f.AllowEmptyValue = false;
-            if (f.ShowDialog() == DialogResult.OK)
+            using (var f = new frmInputBox("Nuevo rubro", "Descripción:"))
             {
-                string v = f.Value.Trim();
-                try
+                f.AllowEmptyValue = false;
+                if (f.ShowDialog() == DialogResult.OK)
                 {
-                    new RubrosRepository().Insertar(new Rubro { Descripcion = v });
-                    ConsultarDatos();
+                    string descripción = f.Value.Trim();
+                    try
+                    {
+                        RubrosRepository.Insertar(descripción);
+                        ConsultarDatos();
+                    }
+                    catch (Exception ex)
+                    {
+                        CustomMessageBox.ShowError(ex.Message);
+                    }
+                    dgvDatos.Posicionar(r => r.Cells[1].Value.ToString().ToLower().Equals(descripción.ToLower()));
                 }
-                catch (Exception ex)
-                {
-                    CustomMessageBox.ShowError(ex.Message);
-                }
-                dgvDatos.Posicionar(r => r.Cells[1].Value.ToString().Equals(v));
             }
         }
 
@@ -62,17 +58,17 @@ namespace Finanzas.Forms
             f.AllowEmptyValue = false;
             if (f.ShowDialog() == DialogResult.OK)
             {
-                string v = f.Value.Trim();
+                descripción = f.Value.Trim();
                 try
                 {
-                    new RubrosRepository().Actualizar(id, v);
+                    RubrosRepository.Actualizar(id, descripción);
                     ConsultarDatos();
                 }
                 catch (Exception ex)
                 {
                     CustomMessageBox.ShowError(ex.Message);
                 }
-                dgvDatos.Posicionar(r => r.Cells[1].Value.ToString().Equals(v));
+                dgvDatos.Posicionar(r => r.Cells[1].Value.ToString().ToLower().Equals(descripción.ToLower()));
             }
         }
 
@@ -86,7 +82,7 @@ namespace Finanzas.Forms
             {
                 try
                 {
-                    new RubrosRepository().Eliminar(id);
+                    RubrosRepository.Eliminar(id);
                     ConsultarDatos();
                 }
                 catch (Exception ex)

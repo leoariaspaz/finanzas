@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Finanzas.Lib.Extensions;
+using Finanzas.Repositories;
 
 namespace Finanzas.Forms.Transacciones
 {
@@ -110,25 +111,21 @@ namespace Finanzas.Forms.Transacciones
 
         private void btnNuevo_Click(object sender, EventArgs e)
         {
-            var trx = new Transaccion();
-            trx.Rubro = (Rubro)cbRubros.SelectedItem;
-            using (var f = new frmEdición(trx))
+            using (var f = new frmEdición((int)cbRubros.SelectedValue))
             {
                 if (f.ShowDialog() == DialogResult.OK)
                 {
-                    using (var db = new GastosEntities())
+                    try
                     {
-                        trx.Descripcion = f.Descripción;
-                        trx.EsDebito = f.EsDébito;
-                        trx.Estado = f.Estado;
-                        trx.IdRubro = f.IdRubro;
-                        trx.Rubro = null;
-                        db.Transacciones.Add(trx);
-                        db.SaveChanges();
-                        cbRubros.SelectedValue = f.IdRubro;
+                        var trx = new TransaccionesRepository().Insertar(f.Descripción, f.EsDébito, f.Estado, f.IdRubro);
+                        cbRubros.SelectedValue = trx.IdRubro;
                         ConsultarDatos();
-                        dgvDatos.Posicionar(r => r.Cells[1].Value.ToString() == trx.Descripcion);
                     }
+                    catch (Exception ex)
+                    {
+                        CustomMessageBox.ShowError(ex.Message);
+                    }
+                    dgvDatos.Posicionar(r => r.Cells[1].Value.ToString().ToLower() == f.Descripción.Trim().ToLower());
                 }
             }
         }

@@ -9,20 +9,33 @@ namespace Finanzas.Repositories
 {
     public class RubrosRepository
     {
-        public void Insertar(Rubro rubro)
+        public static IEnumerable<Rubro> ObtenerRubros()
         {
             using (var db = new GastosEntities())
             {
-                if (db.Rubros.Any(r => r.Descripcion == rubro.Descripcion))
+                var query = (from r in db.Rubros
+                             orderby r.Descripcion
+                             select new { r.Id, r.Descripcion })
+                            .ToList()
+                            .Select(r => new Rubro { Id = r.Id, Descripcion = r.Descripcion });
+                return query;
+            }
+        }
+
+        public static void Insertar(string descripción)
+        {
+            using (var db = new GastosEntities())
+            {
+                if (db.Rubros.Any(r => r.Descripcion == descripción))
                 {
                     throw new Exception("Ya existe el rubro ingresado.");
                 }
-                db.Rubros.Add(rubro);
+                db.Rubros.Add(new Rubro { Descripcion = descripción });
                 db.SaveChanges();
             }
         }
 
-        public void Actualizar(int id, string descripción)
+        public static void Actualizar(int id, string descripción)
         {
             using (var db = new GastosEntities())
             {
@@ -32,7 +45,7 @@ namespace Finanzas.Repositories
             }
         }
 
-        public void Eliminar(int id)
+        public static void Eliminar(int id)
         {
             using (var db = new GastosEntities())
             {
