@@ -45,7 +45,7 @@ namespace Finanzas.Forms.Transacciones
                 cbRubros.DataSource = db.Rubros.ToList();
                 cbRubros.ValueMember = "Id";
                 cbRubros.DisplayMember = "Descripcion";
-                cbRubros.SelectedValue = transacción.Rubro.Id;
+                cbRubros.SelectedValue = transacción.IdRubro;
             }
             txtDescripción.Text = transacción.Descripcion;
             ckEsDébito.Checked = transacción.EsDebito;

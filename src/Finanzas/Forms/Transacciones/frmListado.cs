@@ -28,15 +28,9 @@ namespace Finanzas.Forms.Transacciones
 
         private void frmEditarTransacciones_Load(object sender, EventArgs e)
         {
-            using (var db = new GastosEntities())
-            {
-                var query = from r in db.Rubros
-                            orderby r.Descripcion
-                            select r;
-                cbRubros.DataSource = query.ToList();
-                cbRubros.DisplayMember = "Descripcion";
-                cbRubros.ValueMember = "Id";
-            }
+            cbRubros.DataSource = RubrosRepository.ObtenerRubros().OrderBy(r => r.Descripcion).ToList();
+            cbRubros.DisplayMember = "Descripcion";
+            cbRubros.ValueMember = "Id";
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
@@ -64,14 +58,17 @@ namespace Finanzas.Forms.Transacciones
 
         private void ConsultarDatos()
         {
-            using (var db = new GastosEntities())
-            {
-                var qry = from t in db.Transacciones
-                          orderby t.Descripcion
-                          where t.IdRubro == ((Rubro)cbRubros.SelectedItem).Id
-                          select new { t.Id, t.Descripcion, t.EsDebito, Estado = t.Estado == 1 ? "Activo" : "Baja" };
-                dgvDatos.DataSource = qry.ToList();
-            }
+            int idRubro = ((Rubro)cbRubros.SelectedItem).Id;
+            var qry = TransaccionesRepository.ObtenerTransaccionesPorIdRubro(idRubro)
+                                  .OrderBy(t => t.Descripcion)
+                                  .Select(t => new
+                                  {
+                                      t.Id,
+                                      t.Descripcion,
+                                      t.EsDebito,
+                                      Estado = t.Estado == 1 ? "Activo" : "Baja"
+                                  });
+            dgvDatos.DataSource = qry.ToList();
         }
 
         private void dgvDatos_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
@@ -133,8 +130,9 @@ namespace Finanzas.Forms.Transacciones
         private void btnEditar_Click(object sender, EventArgs e)
         {
             int rowindex = dgvDatos.CurrentCell.RowIndex;
-            //var id = (int)dgvDatos.Rows[rowindex].Cells[0].Value;
-            var trx = (Transaccion)dgvDatos.Rows[rowindex].DataBoundItem;
+            var id = (int)dgvDatos.Rows[rowindex].Cells[0].Value;
+            var trx = TransaccionesRepository.ObtenerTransaccionPorId(id);
+            //var trx = (Transaccion)dgvDatos.Rows[rowindex].DataBoundItem;
 
             //using (var db = new GastosEntities())
             //{

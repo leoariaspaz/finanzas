@@ -13,12 +13,7 @@ namespace Finanzas.Repositories
         {
             using (var db = new GastosEntities())
             {
-                var query = (from r in db.Rubros
-                             orderby r.Descripcion
-                             select new { r.Id, r.Descripcion })
-                            .ToList()
-                            .Select(r => new Rubro { Id = r.Id, Descripcion = r.Descripcion });
-                return query;
+                return db.Rubros.ToList().Select(r => new Rubro { Id = r.Id, Descripcion = r.Descripcion });
             }
         }
 

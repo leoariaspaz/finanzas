@@ -9,6 +9,15 @@ namespace Finanzas.Repositories
 {
     public class TransaccionesRepository
     {
+        public static IEnumerable<Transaccion> ObtenerTransaccionesPorIdRubro(int id)
+        {
+            using (var db = new GastosEntities())
+            {
+                var qry = from t in db.Transacciones where t.IdRubro == id select t;
+                return qry.ToList();
+            }
+        }
+
         public static Transaccion Insertar(string descripción, bool esDébito, byte estado, int idRubro)
         {
             using (var db = new GastosEntities())
@@ -63,6 +72,17 @@ namespace Finanzas.Repositories
                 db.Transacciones.Remove(trx);
                 db.SaveChanges();
             }
+        }
+
+        public static Transaccion ObtenerTransaccionPorId(int id)
+        {
+            IEnumerable<Transaccion> query;
+            using (var db = new GastosEntities())
+            {
+                //return db.Set<Transaccion>().Find(id);
+                query = (from t in db.Transacciones where t.Id == id select t).ToList();
+            }
+            return query.First();
         }
     }
 }
