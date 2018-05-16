@@ -1,14 +1,11 @@
 ﻿using Finanzas.Models;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Finanzas.Lib.Extensions;
+using Finanzas.Repositories;
 
 namespace Finanzas.Forms
 {
@@ -27,13 +24,6 @@ namespace Finanzas.Forms
                 var query = from r in db.Rubros
                             orderby r.Descripcion
                             select new { r.Id, r.Descripcion };
-                //ComponentModel.SortableBindingList<Tuple<int, string>> rubros = new ComponentModel.SortableBindingList<Tuple<int, string>>();
-                //foreach (var item in query)
-                //{
-                //    rubros.Add(new Tuple<int, string>(item.Id, item.Descripcion));
-                //}
-                //dgvDatos.DataSource = rubros;
-
                 dgvDatos.DataSource = query.ToSortableBindingList(t => new Tuple<int, string>(t.Id, t.Descripcion));
             }
         }
@@ -45,55 +35,20 @@ namespace Finanzas.Forms
 
         private void btnNuevo_Click(object sender, EventArgs e)
         {
-            //var f = new frmInputBox("Nuevo rubro", "Descripción:");
-            //bool salir = false;
-            //while (!salir)
-            //{
-            //    if (f.ShowDialog() == DialogResult.OK)
-            //    {
-            //        string v = f.Value.Trim();
-            //        if (!String.IsNullOrEmpty(v))
-            //        {
-            //            using (var db = new GastosEntities())
-            //            {
-            //                if (db.Rubros.Any(r => r.Descripcion == v))
-            //                {
-            //                    MessageBox.Show("Ya existe el rubro ingresado.", "Error",
-            //                        MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //                    continue;
-            //                }
-            //                db.Rubros.Add(new Rubro { Descripcion = v });
-            //                db.SaveChanges();
-            //            }
-            //            ConsultarDatos();
-            //            dgvDatos.Posicionar(r => r.Cells[1].Value.ToString().Equals(v));
-            //            salir = true;
-            //        }
-            //    }
-            //    else
-            //    {
-            //        salir = true;
-            //    }
-            //}
-
             var f = new frmInputBox("Nuevo rubro", "Descripción:");
             f.AllowEmptyValue = false;
             if (f.ShowDialog() == DialogResult.OK)
             {
                 string v = f.Value.Trim();
-                using (var db = new GastosEntities())
+                try
                 {
-                    if (db.Rubros.Any(r => r.Descripcion == v))
-                    {
-                        MessageBox.Show("Ya existe el rubro ingresado.", "Error",
-                            MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        dgvDatos.Posicionar(r => r.Cells[1].Value.ToString().Equals(v));
-                        return;
-                    }
-                    db.Rubros.Add(new Rubro { Descripcion = v });
-                    db.SaveChanges();
+                    new RubrosRepository().Insertar(new Rubro { Descripcion = v });
+                    ConsultarDatos();
                 }
-                ConsultarDatos();
+                catch (Exception ex)
+                {
+                    CustomMessageBox.ShowError(ex.Message);
+                }
                 dgvDatos.Posicionar(r => r.Cells[1].Value.ToString().Equals(v));
             }
         }
@@ -101,45 +56,42 @@ namespace Finanzas.Forms
         private void btnEditar_Click(object sender, EventArgs e)
         {
             int rowindex = dgvDatos.CurrentCell.RowIndex;
-            string rubro = dgvDatos.Rows[rowindex].Cells[1].Value.ToString();
-            var f = new frmInputBox("Edición de rubro", "Descripción:", rubro);
+            int id = (int)dgvDatos.Rows[rowindex].Cells[0].Value;
+            string descripción = dgvDatos.Rows[rowindex].Cells[1].Value.ToString();
+            var f = new frmInputBox("Edición de rubro", "Descripción:", descripción);
             f.AllowEmptyValue = false;
             if (f.ShowDialog() == DialogResult.OK)
             {
                 string v = f.Value.Trim();
-                if (!String.IsNullOrEmpty(v))
+                try
                 {
-                    using (var db = new GastosEntities())
-                    {
-                        var r = db.Rubros.FirstOrDefault(r1 => r1.Descripcion == rubro);
-                        r.Descripcion = v;
-                        db.SaveChanges();
-                    }
+                    new RubrosRepository().Actualizar(id, v);
                     ConsultarDatos();
-                    dgvDatos.Posicionar(r => r.Cells[1].Value.ToString().Equals(v));
                 }
+                catch (Exception ex)
+                {
+                    CustomMessageBox.ShowError(ex.Message);
+                }
+                dgvDatos.Posicionar(r => r.Cells[1].Value.ToString().Equals(v));
             }
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            using (var db = new GastosEntities())
+            int rowindex = dgvDatos.CurrentCell.RowIndex;
+            int id = (int)dgvDatos.Rows[rowindex].Cells[0].Value;
+            string descripción = dgvDatos.Rows[rowindex].Cells[1].Value.ToString();
+            if (MessageBox.Show(String.Format("¿Está seguro de que desea eliminar {0}?", descripción),
+                "Eliminar rubro", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                int rowindex = dgvDatos.CurrentCell.RowIndex;
-                int id = (int)dgvDatos.Rows[rowindex].Cells[0].Value;
-                var rubro = db.Rubros.FirstOrDefault(r => r.Id == id);
-                if (MessageBox.Show(String.Format("¿Está seguro de que desea eliminar {0}?", rubro.Descripcion),
-                    "Eliminar rubro", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+                try
                 {
-                    if (rubro.Transacciones.Any())
-                    {
-                        MessageBox.Show("No se puede eliminar este rubro: tiene transacciones relacionadas.", "Error",
-                            MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
-                    }
-                    db.Rubros.Remove(rubro);
-                    db.SaveChanges();
+                    new RubrosRepository().Eliminar(id);
                     ConsultarDatos();
+                }
+                catch (Exception ex)
+                {
+                    CustomMessageBox.ShowError(ex.Message);
                 }
             }
         }
@@ -168,6 +120,8 @@ namespace Finanzas.Forms
             dgvDatos.Columns[1].HeaderText = "Descripción";
             dgvDatos.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dgvDatos.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+            dgvDatos.Columns[1].HeaderCell.SortGlyphDirection = SortOrder.Descending;
         }
 
         private void frmEditarRubros_KeyDown(object sender, KeyEventArgs e)
