@@ -21,6 +21,6 @@ namespace Finanzas.Models
         public decimal Importe { get; set; }
     
         public virtual Cuenta Cuenta { get; set; }
-        public virtual Transaccion Transaccione { get; set; }
+        public virtual Transaccion Transaccion { get; set; }
     }
 }

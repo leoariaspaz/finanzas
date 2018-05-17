@@ -59,7 +59,7 @@ namespace Finanzas.Forms.Transacciones
         private void ConsultarDatos()
         {
             int idRubro = ((Rubro)cbRubros.SelectedItem).Id;
-            var qry = TransaccionesRepository.ObtenerTransaccionesPorIdRubro(idRubro)
+            var qry = TransaccionesRepository.ObtenerTransaccionesPorRubro(idRubro)
                                   .OrderBy(t => t.Descripcion)
                                   .Select(t => new
                                   {
@@ -132,27 +132,6 @@ namespace Finanzas.Forms.Transacciones
             int rowindex = dgvDatos.CurrentCell.RowIndex;
             var id = (int)dgvDatos.Rows[rowindex].Cells[0].Value;
             var trx = TransaccionesRepository.ObtenerTransaccionPorId(id);
-            //var trx = (Transaccion)dgvDatos.Rows[rowindex].DataBoundItem;
-
-            //using (var db = new GastosEntities())
-            //{
-            //    var trx = db.Transacciones.Find(id);
-            //    using (var f = new frmEdición(trx))
-            //    {
-            //        if (f.ShowDialog() == DialogResult.OK)
-            //        {
-            //            trx.Descripcion = f.Descripción;
-            //            trx.EsDebito = f.EsDébito;
-            //            trx.Estado = f.Estado;
-            //            trx.IdRubro = f.IdRubro;
-            //            db.SaveChanges();
-            //            cbRubros.SelectedValue = f.IdRubro;
-            //            ConsultarDatos();
-            //            dgvDatos.Posicionar(r => Int32.Parse(r.Cells[0].Value.ToString()) == trx.Id);
-            //        }
-            //    }
-            //}
-
             using (var f = new frmEdición(trx))
             {
                 if (f.ShowDialog() == DialogResult.OK)
@@ -174,42 +153,20 @@ namespace Finanzas.Forms.Transacciones
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            //using (var db = new GastosEntities())
-            //{
-            //    int rowindex = dgvDatos.CurrentCell.RowIndex;
-            //    int id = (int)dgvDatos.Rows[rowindex].Cells[0].Value;
-            //    var trx = db.Transacciones.FirstOrDefault(t => t.Id == id);
-            //    if (MessageBox.Show(String.Format("¿Está seguro de que desea eliminar {0}?", trx.Descripcion),
-            //        "Eliminar transacción", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
-            //    {
-            //        if (trx.Movimientos.Any())
-            //        {
-            //            MessageBox.Show("No se puede eliminar esta transacción: tiene transacciones relacionadas.", "Error",
-            //                MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //            return;
-            //        }
-            //        db.Transacciones.Remove(trx);
-            //        db.SaveChanges();
-            //        ConsultarDatos();
-            //    }
-            //}
-
-            using (var db = new GastosEntities())
+            int rowindex = dgvDatos.CurrentCell.RowIndex;
+            var id = (int)dgvDatos.Rows[rowindex].Cells[0].Value;
+            var trx = TransaccionesRepository.ObtenerTransaccionPorId(id);
+            if (MessageBox.Show(String.Format("¿Está seguro de que desea eliminar {0}?", trx.Descripcion),
+                "Eliminar transacción", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
             {
-                int rowindex = dgvDatos.CurrentCell.RowIndex;
-                var trx = (Transaccion)dgvDatos.Rows[rowindex].DataBoundItem;
-                if (MessageBox.Show(String.Format("¿Está seguro de que desea eliminar {0}?", trx.Descripcion),
-                    "Eliminar transacción", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+                try
                 {
-                    try
-                    {
-                        TransaccionesRepository.Eliminar(trx.Id);
-                        ConsultarDatos();
-                    }
-                    catch (Exception ex)
-                    {
-                        CustomMessageBox.ShowError(ex.Message);
-                    }
+                    TransaccionesRepository.Eliminar(trx.Id);
+                    ConsultarDatos();
+                }
+                catch (Exception ex)
+                {
+                    CustomMessageBox.ShowError(ex.Message);
                 }
             }
         }

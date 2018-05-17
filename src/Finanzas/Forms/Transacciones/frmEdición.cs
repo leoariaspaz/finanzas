@@ -1,4 +1,5 @@
 ﻿using Finanzas.Models;
+using Finanzas.Repositories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -28,25 +29,19 @@ namespace Finanzas.Forms.Transacciones
         public frmEdición(int idRubro) : this()
         {
             this.Text = "Nueva transacción";
-            using (var db = new GastosEntities())
-            {
-                cbRubros.DataSource = db.Rubros.ToList();
-                cbRubros.ValueMember = "Id";
-                cbRubros.DisplayMember = "Descripcion";
-                cbRubros.SelectedValue = idRubro;
-            }
+            cbRubros.DataSource = RubrosRepository.ObtenerRubros();
+            cbRubros.ValueMember = "Id";
+            cbRubros.DisplayMember = "Descripcion";
+            cbRubros.SelectedValue = idRubro;
         }
 
         public frmEdición(Transaccion transacción) : this()
         {
             this.Text = "Edición de transacción";
-            using (var db = new GastosEntities())
-            {
-                cbRubros.DataSource = db.Rubros.ToList();
-                cbRubros.ValueMember = "Id";
-                cbRubros.DisplayMember = "Descripcion";
-                cbRubros.SelectedValue = transacción.IdRubro;
-            }
+            cbRubros.DataSource = RubrosRepository.ObtenerRubros();
+            cbRubros.ValueMember = "Id";
+            cbRubros.DisplayMember = "Descripcion";
+            cbRubros.SelectedValue = transacción.IdRubro;
             txtDescripción.Text = transacción.Descripcion;
             ckEsDébito.Checked = transacción.EsDebito;
             ckHabilitada.Checked = transacción.Estado == 1;

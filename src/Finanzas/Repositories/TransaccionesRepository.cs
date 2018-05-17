@@ -9,11 +9,11 @@ namespace Finanzas.Repositories
 {
     public class TransaccionesRepository
     {
-        public static IEnumerable<Transaccion> ObtenerTransaccionesPorIdRubro(int id)
+        public static IEnumerable<Transaccion> ObtenerTransaccionesPorRubro(int idRubro)
         {
             using (var db = new GastosEntities())
             {
-                var qry = from t in db.Transacciones where t.IdRubro == id select t;
+                var qry = from t in db.Transacciones where t.IdRubro == idRubro select t;
                 return qry.ToList();
             }
         }

@@ -119,7 +119,7 @@
           <Property Name="IdCuenta" Type="Int32" Nullable="false" />
           <Property Name="Importe" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
           <NavigationProperty Name="Cuenta" Relationship="Self.FK_Movimientos_Cuentas" FromRole="Movimientos" ToRole="Cuentas" />
-          <NavigationProperty Name="Transaccione" Relationship="Self.FK_Movimientos_Transacciones" FromRole="Movimientos" ToRole="Transacciones" />
+          <NavigationProperty Name="Transaccion" Relationship="Self.FK_Movimientos_Transacciones" FromRole="Movimientos" ToRole="Transacciones" />
         </EntityType>
         <EntityType Name="Rubro">
           <Key>

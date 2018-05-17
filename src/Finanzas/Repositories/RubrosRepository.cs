@@ -9,11 +9,11 @@ namespace Finanzas.Repositories
 {
     public class RubrosRepository
     {
-        public static IEnumerable<Rubro> ObtenerRubros()
+        public static IList<Rubro> ObtenerRubros()
         {
             using (var db = new GastosEntities())
             {
-                return db.Rubros.ToList().Select(r => new Rubro { Id = r.Id, Descripcion = r.Descripcion });
+                return db.Rubros.ToList().Select(r => new Rubro { Id = r.Id, Descripcion = r.Descripcion }).ToList();
             }
         }
 
