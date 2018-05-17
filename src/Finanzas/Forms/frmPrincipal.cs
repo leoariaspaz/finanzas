@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Finanzas.Forms.Cuentas;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -39,7 +40,7 @@ namespace Finanzas.Forms
 
         private void cuentasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (var f = new frmEditarCuentas()) f.ShowDialog();
+            using (var f = new frmListado()) f.ShowDialog();
         }
     }
 }
