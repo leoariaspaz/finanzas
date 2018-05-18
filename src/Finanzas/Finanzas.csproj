@@ -92,6 +92,12 @@
     <Compile Include="Forms\frmEditarRubros.Designer.cs">
       <DependentUpon>frmEditarRubros.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Movimientos\frmEdición.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Movimientos\frmEdición.Designer.cs">
+      <DependentUpon>frmEdición.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Transacciones\frmEdición.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -160,6 +166,9 @@
     <Compile Include="Repositories\RubrosRepository.cs" />
     <Compile Include="Repositories\TransaccionesRepository.cs" />
     <EmbeddedResource Include="Forms\Cuentas\frmEdición.resx">
+      <DependentUpon>frmEdición.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Movimientos\frmEdición.resx">
       <DependentUpon>frmEdición.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Movimientos\frmListado.resx">

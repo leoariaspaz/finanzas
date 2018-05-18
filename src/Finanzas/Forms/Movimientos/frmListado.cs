@@ -18,12 +18,12 @@ namespace Finanzas.Forms.Movimientos
         public frmListado()
         {
             InitializeComponent();
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.ShowInTaskbar = false;
-            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.SizeGripStyle = SizeGripStyle.Hide;
+            this.StartPosition = FormStartPosition.CenterScreen;
         }
 
         private void frmConsultaMovimientos_Load(object sender, EventArgs e)
@@ -93,7 +93,23 @@ namespace Finanzas.Forms.Movimientos
 
         private void btnNuevo_Click(object sender, EventArgs e)
         {
-
+            using (var f = new frmEdición((int)cbCuentas.SelectedValue))
+            {
+                if (f.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        //var trx = TransaccionesRepository.Insertar(f.Descripción, f.EsDébito, f.Estado, f.IdRubro);
+                        //cbRubros.SelectedValue = trx.IdRubro;
+                        //ConsultarDatos();
+                    }
+                    catch (Exception ex)
+                    {
+                        CustomMessageBox.ShowError(ex.Message);
+                    }
+                    //dgvDatos.Posicionar(r => r.Cells[1].Value.ToString().ToLower() == f.Descripción.Trim().ToLower());
+                }
+            }
         }
 
         private void btnEditar_Click(object sender, EventArgs e)
