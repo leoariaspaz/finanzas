@@ -153,7 +153,7 @@
             this.ShowInTaskbar = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Edición de Rubros";
+            this.Text = "Rubros";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmEditarRubros_KeyDown);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();

@@ -32,13 +32,13 @@ namespace Finanzas.Forms.Cuentas
         {
             dgvDatos.DataSource = (from c in CuentasRepository.ObtenerCuentas()
                                    select new
-                                       {
-                                           c.Id,
-                                           c.Descripcion,
-                                           c.SaldoInicial,
-                                           DescripciónEstado = (c.Estado == 1 ? "Activa" : "Baja"),
-                                           c.Estado
-                                       }).ToList();
+                                   {
+                                       c.Id,
+                                       c.Descripcion,
+                                       c.SaldoInicial,
+                                       DescripciónEstado = (c.Estado == 1 ? "Activa" : "Baja"),
+                                       c.Estado
+                                   }).ToSortableBindingList();
         }
 
         private void dgvDatos_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)

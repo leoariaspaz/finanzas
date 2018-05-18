@@ -1,5 +1,4 @@
-﻿using Finanzas.Forms.Cuentas;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -30,7 +29,7 @@ namespace Finanzas.Forms
 
         private void consultarMovimientosToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            using (var f = new frmConsultaMovimientos()) f.ShowDialog();
+            using (var f = new Movimientos.frmListado()) f.ShowDialog();
         }
 
         private void transaccionesToolStripMenuItem_Click(object sender, EventArgs e)
@@ -40,7 +39,7 @@ namespace Finanzas.Forms
 
         private void cuentasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (var f = new frmListado()) f.ShowDialog();
+            using (var f = new Cuentas.frmListado()) f.ShowDialog();
         }
     }
 }

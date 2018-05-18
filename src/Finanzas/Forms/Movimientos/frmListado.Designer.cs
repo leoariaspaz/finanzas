@@ -1,16 +1,16 @@
-﻿namespace Finanzas.Forms.Transacciones
+﻿namespace Finanzas.Forms.Movimientos
 {
     partial class frmListado
     {
         /// <summary>
-        /// Required designer variable.
+        /// Variable del diseñador requerida.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
         /// <summary>
-        /// Clean up any resources being used.
+        /// Limpiar los recursos que se estén utilizando.
         /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        /// <param name="disposing">true si los recursos administrados se deben desechar; false en caso contrario.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -20,11 +20,11 @@
             base.Dispose(disposing);
         }
 
-        #region Windows Form Designer generated code
+        #region Código generado por el Diseñador de Windows Forms
 
         /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
+        /// Método necesario para admitir el Diseñador. No se puede modificar
+        /// el contenido del método con el editor de código.
         /// </summary>
         private void InitializeComponent()
         {
@@ -37,7 +37,7 @@
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
             this.dgvDatos = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.cbRubros = new System.Windows.Forms.ComboBox();
+            this.cbCuentas = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -59,8 +59,8 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(534, 402);
-            this.tableLayoutPanel1.TabIndex = 1;
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(772, 593);
+            this.tableLayoutPanel1.TabIndex = 2;
             // 
             // toolStrip1
             // 
@@ -73,7 +73,7 @@
             this.btnSalir});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(534, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(772, 25);
             this.toolStrip1.TabIndex = 5;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -124,7 +124,7 @@
             this.btnSalir.Size = new System.Drawing.Size(23, 22);
             this.btnSalir.Text = "&Esc";
             this.btnSalir.ToolTipText = "Salir (Escape)";
-            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click_1);
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
             // dgvDatos
             // 
@@ -139,51 +139,51 @@
             this.dgvDatos.Name = "dgvDatos";
             this.dgvDatos.ReadOnly = true;
             this.dgvDatos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDatos.Size = new System.Drawing.Size(528, 336);
+            this.dgvDatos.Size = new System.Drawing.Size(766, 527);
             this.dgvDatos.TabIndex = 3;
             this.dgvDatos.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvDatos_DataBindingComplete);
             this.dgvDatos.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.dgvDatos_RowPrePaint);
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.cbRubros);
+            this.panel1.Controls.Add(this.cbCuentas);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(3, 28);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(528, 29);
+            this.panel1.Size = new System.Drawing.Size(766, 29);
             this.panel1.TabIndex = 4;
             // 
-            // cbRubros
+            // cbCuentas
             // 
-            this.cbRubros.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbRubros.FormattingEnabled = true;
-            this.cbRubros.Location = new System.Drawing.Point(181, 5);
-            this.cbRubros.Name = "cbRubros";
-            this.cbRubros.Size = new System.Drawing.Size(215, 21);
-            this.cbRubros.TabIndex = 1;
-            this.cbRubros.SelectedValueChanged += new System.EventHandler(this.cbRubros_SelectedValueChanged);
+            this.cbCuentas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCuentas.FormattingEnabled = true;
+            this.cbCuentas.Location = new System.Drawing.Point(55, 5);
+            this.cbCuentas.Name = "cbCuentas";
+            this.cbCuentas.Size = new System.Drawing.Size(215, 21);
+            this.cbCuentas.TabIndex = 1;
+            this.cbCuentas.SelectedIndexChanged += new System.EventHandler(this.cbCuentas_SelectedIndexChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(138, 9);
+            this.label1.Location = new System.Drawing.Point(12, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(42, 13);
+            this.label1.Size = new System.Drawing.Size(44, 13);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Rubro: ";
+            this.label1.Text = "Cuenta:";
             // 
             // frmListado
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(534, 402);
+            this.ClientSize = new System.Drawing.Size(772, 593);
             this.Controls.Add(this.tableLayoutPanel1);
             this.KeyPreview = true;
             this.Name = "frmListado";
-            this.Text = "Transacciones";
-            this.Load += new System.EventHandler(this.frmEditarTransacciones_Load);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmEditarTransacciones_KeyDown);
+            this.Text = "Movimientos";
+            this.Load += new System.EventHandler(this.frmConsultaMovimientos_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmListado_KeyDown);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
@@ -198,15 +198,16 @@
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.DataGridView dgvDatos;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.ComboBox cbRubros;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton btnNuevo;
         private System.Windows.Forms.ToolStripButton btnEditar;
         private System.Windows.Forms.ToolStripButton btnEliminar;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton btnSalir;
+        private System.Windows.Forms.DataGridView dgvDatos;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.ComboBox cbCuentas;
+        private System.Windows.Forms.Label label1;
     }
 }
+

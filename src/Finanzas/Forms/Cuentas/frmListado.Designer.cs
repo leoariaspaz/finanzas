@@ -146,7 +146,7 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.KeyPreview = true;
             this.Name = "frmListado";
-            this.Text = "Editar Cuentas";
+            this.Text = "Cuentas";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmEditarCuentas_KeyDown);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
