@@ -31,10 +31,10 @@ namespace Finanzas.Forms.Movimientos
             cbCuentas.DataSource = CuentasRepository.ObtenerCuentas().OrderBy(r => r.Descripcion).ToList();
             cbCuentas.DisplayMember = "Descripcion";
             cbCuentas.ValueMember = "Id";
-            ConsultarMovimientos();
+            ConsultarDatos();
         }
 
-        private void ConsultarMovimientos()
+        private void ConsultarDatos()
         {
             dgvDatos.DataSource = MovimientosRepository.ObtenerMovimientosPorCuenta(IdCuenta);
         }
@@ -56,7 +56,7 @@ namespace Finanzas.Forms.Movimientos
 
         private void cbCuentas_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ConsultarMovimientos();
+            ConsultarDatos();
         }
 
         private void dgvDatos_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
@@ -99,9 +99,9 @@ namespace Finanzas.Forms.Movimientos
                 {
                     try
                     {
-                        //var trx = TransaccionesRepository.Insertar(f.Descripción, f.EsDébito, f.Estado, f.IdRubro);
-                        //cbRubros.SelectedValue = trx.IdRubro;
-                        //ConsultarDatos();
+                        var mov = MovimientosRepository.Insertar(f.IdCuenta, f.Fecha, f.IdTransaccion, f.Importe);
+                        cbCuentas.SelectedValue = mov.IdCuenta;
+                        ConsultarDatos();
                     }
                     catch (Exception ex)
                     {

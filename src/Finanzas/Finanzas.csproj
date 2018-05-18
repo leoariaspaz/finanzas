@@ -128,6 +128,7 @@
     <Compile Include="Forms\Movimientos\frmListado.Designer.cs">
       <DependentUpon>frmListado.cs</DependentUpon>
     </Compile>
+    <Compile Include="Lib\Configuration.cs" />
     <Compile Include="Lib\Extensions\DataGridViewExtensions.cs" />
     <Compile Include="Lib\System.Windows.Forms\CustomMessageBox.cs" />
     <Compile Include="Lib\Extensions\ToolTipExtensions.cs" />

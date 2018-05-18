@@ -11,7 +11,7 @@ namespace Finanzas.Lib.Extensions
     public static class ToolTipExtensions
     {
         public static void ShowError(this ToolTip toolTip, IWin32Window window, TextBox textBox, string message, 
-            int duration)
+            int duration = 3000)
         {
             Point p = new Point(textBox.Left + textBox.Size.Width / 2, textBox.Top + textBox.Size.Height / 2 - 20);
             if (!textBox.Multiline) p.Y -= 25;

@@ -119,9 +119,10 @@
             // 
             this.txtImporte.Location = new System.Drawing.Point(99, 116);
             this.txtImporte.Name = "txtImporte";
-            this.txtImporte.Size = new System.Drawing.Size(200, 20);
+            this.txtImporte.Size = new System.Drawing.Size(145, 20);
             this.txtImporte.TabIndex = 4;
             this.txtImporte.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtImporte.Leave += new System.EventHandler(this.txtImporte_Leave);
             // 
             // label5
             // 
@@ -171,9 +172,11 @@
             // 
             // dtFecha
             // 
+            this.dtFecha.CustomFormat = "dddd, dd/MM/yyyy";
+            this.dtFecha.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtFecha.Location = new System.Drawing.Point(99, 36);
             this.dtFecha.Name = "dtFecha";
-            this.dtFecha.Size = new System.Drawing.Size(200, 20);
+            this.dtFecha.Size = new System.Drawing.Size(145, 20);
             this.dtFecha.TabIndex = 1;
             // 
             // cbCuentas
