@@ -28,20 +28,23 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnAceptar = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.cbRubros = new System.Windows.Forms.ComboBox();
             this.ckHabilitada = new System.Windows.Forms.CheckBox();
             this.txtDescripción = new System.Windows.Forms.TextBox();
             this.ckEsDébito = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.cbRubros = new System.Windows.Forms.ComboBox();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -88,6 +91,7 @@
             this.btnAceptar.TabIndex = 0;
             this.btnAceptar.Text = "&Grabar";
             this.btnAceptar.UseVisualStyleBackColor = true;
+            this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
             // 
             // panel2
             // 
@@ -102,6 +106,15 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(384, 106);
             this.panel2.TabIndex = 1;
+            // 
+            // cbRubros
+            // 
+            this.cbRubros.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbRubros.FormattingEnabled = true;
+            this.cbRubros.Location = new System.Drawing.Point(99, 9);
+            this.cbRubros.Name = "cbRubros";
+            this.cbRubros.Size = new System.Drawing.Size(261, 21);
+            this.cbRubros.TabIndex = 6;
             // 
             // ckHabilitada
             // 
@@ -148,14 +161,9 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Rubro: ";
             // 
-            // cbRubros
+            // errorProvider1
             // 
-            this.cbRubros.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbRubros.FormattingEnabled = true;
-            this.cbRubros.Location = new System.Drawing.Point(99, 9);
-            this.cbRubros.Name = "cbRubros";
-            this.cbRubros.Size = new System.Drawing.Size(261, 21);
-            this.cbRubros.TabIndex = 6;
+            this.errorProvider1.ContainerControl = this;
             // 
             // frmEdición
             // 
@@ -171,6 +179,7 @@
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -188,5 +197,6 @@
         private System.Windows.Forms.TextBox txtDescripción;
         private System.Windows.Forms.CheckBox ckEsDébito;
         private System.Windows.Forms.ComboBox cbRubros;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

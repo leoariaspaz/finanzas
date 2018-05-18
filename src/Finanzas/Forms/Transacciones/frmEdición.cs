@@ -1,4 +1,5 @@
-﻿using Finanzas.Models;
+﻿using Finanzas.Lib.Extensions;
+using Finanzas.Models;
 using Finanzas.Repositories;
 using System;
 using System.Collections.Generic;
@@ -77,6 +78,31 @@ namespace Finanzas.Forms.Transacciones
             {
                 return ((Rubro)cbRubros.SelectedItem).Id;
             }
+        }
+
+        private void btnAceptar_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.None;
+            if (this.ValidarDatos())
+            {
+                DialogResult = DialogResult.OK;
+            }
+        }
+
+        private bool ValidarDatos()
+        {
+            bool result = true;
+            if (String.IsNullOrEmpty(txtDescripción.Text.Trim()))
+            {
+                errorProvider1.SetError(txtDescripción, "No puede estar vacío.");
+                new ToolTip().ShowError(this, txtDescripción, "No puede estar vacío.", 3000);
+                result = false;
+            }
+            else
+            {
+                errorProvider1.SetError(txtDescripción, "");
+            }
+            return result;
         }
     }
 }
