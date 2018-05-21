@@ -8,6 +8,8 @@ namespace Finanzas.Models.ViewModels
 {
     public class Movimiento
     {
+        public Decimal Id { get; set; }
+
         public DateTime Fecha { get; set; }
 
         public string Rubro { get; set; }

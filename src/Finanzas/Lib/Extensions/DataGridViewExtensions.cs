@@ -22,7 +22,14 @@ namespace Finanzas.Lib.Extensions
             }
             if (rowIndex >= 0)
             {
-                grid.CurrentCell = grid.Rows[rowIndex].Cells[0];
+                for (int i = 0; i < grid.Columns.Count; i++)
+                {
+                    if (grid.Columns[i].Visible)
+                    {
+                        grid.CurrentCell = grid.Rows[rowIndex].Cells[i];
+                        return;
+                    }
+                }
             }
         }
 

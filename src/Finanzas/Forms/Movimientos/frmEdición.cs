@@ -27,24 +27,30 @@ namespace Finanzas.Forms.Movimientos
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             dtFecha.MaxDate = Configuration.CurrentDate;
             cbCuentas.Select();
+            cbCuentas.DataSource = CuentasRepository.ObtenerCuentas();
+            cbCuentas.DisplayMember = "Descripcion";
+            cbCuentas.ValueMember = "Id";
+            cbRubros.DataSource = RubrosRepository.ObtenerRubros();
+            cbRubros.DisplayMember = "Descripcion";
+            cbRubros.ValueMember = "Id";
+            CargarTransacciones();
         }
 
         public frmEdición(int idCuenta)
             : this()
         {
             this.Text = "Nuevo movimiento";
-            cbCuentas.DataSource = CuentasRepository.ObtenerCuentas();
-            cbCuentas.DisplayMember = "Descripcion";
-            cbCuentas.ValueMember = "Id";
             cbCuentas.SelectedValue = idCuenta;
+            txtImporte.Text = String.Format("{0:n}", 0);
+        }
 
-            cbRubros.DataSource = RubrosRepository.ObtenerRubros();
-            cbRubros.DisplayMember = "Descripcion";
-            cbRubros.ValueMember = "Id";
-
+        public frmEdición(Movimiento movimiento)
+        {
+            cbCuentas.SelectedValue = movimiento.IdCuenta;
+            cbRubros.SelectedValue = movimiento.Transaccion.IdRubro;
             CargarTransacciones();
-
-            txtImporte.Text = String.Format("{0:C2}", 0);
+            cbTransacciones.SelectedValue = movimiento.IdTransaccion;
+            txtImporte.Text = String.Format("{0:n}", movimiento.Importe);
         }
 
         private void cbRubros_SelectedIndexChanged(object sender, EventArgs e)
@@ -91,7 +97,7 @@ namespace Finanzas.Forms.Movimientos
             {
                 i = 0;
             }
-            txtImporte.Text = String.Format("{0:C2}", i);
+            txtImporte.Text = String.Format("{0:n}", i);
         }
 
 
@@ -99,7 +105,7 @@ namespace Finanzas.Forms.Movimientos
         {
             get
             {
-                return ((Cuenta)cbCuentas.SelectedValue).Id;
+                return (int)cbCuentas.SelectedValue;
             }
         }
 
@@ -130,7 +136,7 @@ namespace Finanzas.Forms.Movimientos
         {
             get
             {
-                return ((Transaccion)cbTransacciones.SelectedValue).Id;
+                return (int)cbTransacciones.SelectedValue;
             }
         }
 

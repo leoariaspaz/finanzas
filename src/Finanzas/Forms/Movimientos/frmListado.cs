@@ -36,7 +36,9 @@ namespace Finanzas.Forms.Movimientos
 
         private void ConsultarDatos()
         {
-            dgvDatos.DataSource = MovimientosRepository.ObtenerMovimientosPorCuenta(IdCuenta);
+            dgvDatos.DataSource = MovimientosRepository.ObtenerMovimientosPorCuenta(IdCuenta)
+                                    .ToSortableBindingList();
+            dgvDatos.Columns[0].Visible = false;
         }
 
         public int IdCuenta
@@ -66,16 +68,16 @@ namespace Finanzas.Forms.Movimientos
                 c.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
                 c.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             }
-            dgvDatos.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dgvDatos.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dgvDatos.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgvDatos.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dgvDatos.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvDatos.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dgvDatos.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvDatos.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
-            dgvDatos.Columns[3].DefaultCellStyle.Format = "C2";
-            dgvDatos.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dgvDatos.Columns[4].DefaultCellStyle.Format = "C2";
             dgvDatos.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvDatos.Columns[5].DefaultCellStyle.Format = "C2";
+            dgvDatos.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
         }
 
         private void dgvDatos_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
@@ -93,7 +95,7 @@ namespace Finanzas.Forms.Movimientos
 
         private void btnNuevo_Click(object sender, EventArgs e)
         {
-            using (var f = new frmEdición((int)cbCuentas.SelectedValue))
+            using (var f = new frmEdición(IdCuenta))
             {
                 if (f.ShowDialog() == DialogResult.OK)
                 {
@@ -102,19 +104,25 @@ namespace Finanzas.Forms.Movimientos
                         var mov = MovimientosRepository.Insertar(f.IdCuenta, f.Fecha, f.IdTransaccion, f.Importe);
                         cbCuentas.SelectedValue = mov.IdCuenta;
                         ConsultarDatos();
+                        dgvDatos.Posicionar(r => Convert.ToDecimal(r.Cells[0].Value) == mov.Id);
                     }
                     catch (Exception ex)
                     {
-                        CustomMessageBox.ShowError(ex.Message);
+                        CustomMessageBox.ShowError("Error al intentar grabar los datos: \n" + ex.Message);
                     }
-                    //dgvDatos.Posicionar(r => r.Cells[1].Value.ToString().ToLower() == f.Descripción.Trim().ToLower());
                 }
             }
         }
 
         private void btnEditar_Click(object sender, EventArgs e)
         {
+            int rowindex = dgvDatos.CurrentCell.RowIndex;
+            var id = (decimal)dgvDatos.Rows[rowindex].Cells[0].Value;
+            var m = MovimientosRepository.ObtenerMovimientoPorId(id);
+            using (var f = new frmEdición(m))
+            {
 
+            }
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)

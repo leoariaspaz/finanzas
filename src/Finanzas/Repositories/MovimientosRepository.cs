@@ -13,18 +13,19 @@ namespace Finanzas.Repositories
         {
             using (var db = new GastosEntities())
             {
-                var query = from c in db.Movimientos
-                            join t in db.Transacciones on c.IdTransaccion equals t.Id
+                var query = from m in db.Movimientos
+                            join t in db.Transacciones on m.IdTransaccion equals t.Id
                             join r in db.Rubros on t.IdRubro equals r.Id
-                            where c.IdCuenta == idCuenta
-                            orderby c.FechaMovimiento descending
+                            where m.IdCuenta == idCuenta
+                            orderby m.FechaMovimiento descending
                             select new Models.ViewModels.Movimiento
                             {
-                                Fecha = c.FechaMovimiento,
+                                Fecha = m.FechaMovimiento,
                                 Rubro = r.Descripcion,
                                 Transacción = t.Descripcion,
-                                Importe = c.Importe,
-                                Saldo = 0
+                                Importe = m.Importe,
+                                Saldo = 0,
+                                Id = m.Id
                             };
                 return query.ToList();
             }
@@ -50,6 +51,14 @@ namespace Finanzas.Repositories
                 db.Movimientos.Add(m);
                 db.SaveChanges();
                 return m;
+            }
+        }
+
+        internal static Movimiento ObtenerMovimientoPorId(decimal idMovimiento)
+        {
+            using (var db = new GastosEntities())
+            {
+                return db.Movimientos.Find(idMovimiento);
             }
         }
     }
