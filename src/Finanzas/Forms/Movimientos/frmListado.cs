@@ -65,19 +65,33 @@ namespace Finanzas.Forms.Movimientos
         {
             foreach (DataGridViewColumn c in dgvDatos.Columns)
             {
+                switch (c.Index)
+                {
+                    case 1: 
+                        c.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+                        break;
+                    case 4:
+                        c.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+                        break;
+                    default:
+                        c.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                        break;
+                }
                 c.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                c.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             }
+
             dgvDatos.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgvDatos.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dgvDatos.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dgvDatos.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dgvDatos.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvDatos.Columns[6].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
-            dgvDatos.Columns[4].DefaultCellStyle.Format = "C2";
-            dgvDatos.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             dgvDatos.Columns[5].DefaultCellStyle.Format = "C2";
             dgvDatos.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvDatos.Columns[6].DefaultCellStyle.Format = "C2";
+            dgvDatos.Columns[6].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+
+            dgvDatos.Columns[1].HeaderCell.SortGlyphDirection = SortOrder.Descending;
         }
 
         private void dgvDatos_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
@@ -139,7 +153,23 @@ namespace Finanzas.Forms.Movimientos
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-
+            int rowindex = dgvDatos.CurrentCell.RowIndex;
+            var id = (decimal)dgvDatos.Rows[rowindex].Cells[0].Value;
+            var m = MovimientosRepository.ObtenerMovimientoPorId(id);
+            if (MessageBox.Show("¿Está seguro de que desea contrasentar el movimiento seleccionado?",
+                "Contrasentar Movimiento", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+            {
+                try
+                {
+                    MovimientosRepository.Contrasentar(m.Id);
+                    ConsultarDatos();
+                    dgvDatos.Posicionar(r => Convert.ToDecimal(r.Cells[0].Value) == m.Id);
+                }
+                catch (Exception ex)
+                {
+                    CustomMessageBox.ShowError(ex.Message);
+                }
+            }
         }
 
         private void frmListado_KeyDown(object sender, KeyEventArgs e)

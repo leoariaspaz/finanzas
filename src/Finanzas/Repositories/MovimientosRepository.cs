@@ -23,6 +23,7 @@ namespace Finanzas.Repositories
                                 Fecha = m.FechaMovimiento,
                                 Rubro = r.Descripcion,
                                 Transacción = t.Descripcion,
+                                Contrasiento = m.EsContrasiento,
                                 Importe = m.Importe,
                                 Saldo = 0,
                                 Id = m.Id
@@ -75,6 +76,24 @@ namespace Finanzas.Repositories
                 m.FechaMovimiento = fecha;
                 m.IdTransaccion = idTransaccion;
                 m.Importe = importe;
+                db.SaveChanges();
+            }
+        }
+
+        internal static void Contrasentar(decimal id)
+        {
+            using (var db = new GastosEntities())
+            {
+                if (!db.Movimientos.Any(t => t.Id == id))
+                {
+                    throw new Exception("No existe el movimiento con Id " + id);
+                }
+                var m = db.Movimientos.Find(id);
+                if (m.EsContrasiento)
+                {
+                    throw new Exception("No existe el movimiento con Id " + id);
+                }
+                m.EsContrasiento = true;
                 db.SaveChanges();
             }
         }

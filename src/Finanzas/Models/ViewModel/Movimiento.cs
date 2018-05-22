@@ -15,6 +15,9 @@ namespace Finanzas.Models.ViewModels
         public string Rubro { get; set; }
 
         public string Transacción { get; set; }
+        
+        [System.ComponentModel.DisplayName("Contr.")]
+        public bool Contrasiento { get; set; }
 
         public decimal Importe { get; set; }
 

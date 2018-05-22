@@ -23,6 +23,8 @@
           <Property Name="IdTransaccion" Type="int" Nullable="false" />
           <Property Name="IdCuenta" Type="int" Nullable="false" />
           <Property Name="Importe" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="EsContrasiento" Type="bit" Nullable="false" />
+          <Property Name="FechaGrabacion" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Rubros">
           <Key>
@@ -41,30 +43,6 @@
           <Property Name="EsDebito" Type="bit" Nullable="false" />
           <Property Name="Estado" Type="tinyint" Nullable="false" />
         </EntityType>
-        <Association Name="FK_Movimientos_Cuentas">
-          <End Role="Cuentas" Type="Self.Cuentas" Multiplicity="1" />
-          <End Role="Movimientos" Type="Self.Movimientos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cuentas">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Movimientos">
-              <PropertyRef Name="IdCuenta" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Movimientos_Transacciones">
-          <End Role="Transacciones" Type="Self.Transacciones" Multiplicity="1" />
-          <End Role="Movimientos" Type="Self.Movimientos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Transacciones">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Movimientos">
-              <PropertyRef Name="IdTransaccion" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Transacciones_Rubros">
           <End Role="Rubros" Type="Self.Rubros" Multiplicity="1" />
           <End Role="Transacciones" Type="Self.Transacciones" Multiplicity="*" />
@@ -82,14 +60,6 @@
           <EntitySet Name="Movimientos" EntityType="Self.Movimientos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rubros" EntityType="Self.Rubros" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Transacciones" EntityType="Self.Transacciones" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Movimientos_Cuentas" Association="Self.FK_Movimientos_Cuentas">
-            <End Role="Cuentas" EntitySet="Cuentas" />
-            <End Role="Movimientos" EntitySet="Movimientos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Movimientos_Transacciones" Association="Self.FK_Movimientos_Transacciones">
-            <End Role="Transacciones" EntitySet="Transacciones" />
-            <End Role="Movimientos" EntitySet="Movimientos" />
-          </AssociationSet>
           <AssociationSet Name="FK_Transacciones_Rubros" Association="Self.FK_Transacciones_Rubros">
             <End Role="Rubros" EntitySet="Rubros" />
             <End Role="Transacciones" EntitySet="Transacciones" />
@@ -120,6 +90,8 @@
           <Property Name="Importe" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
           <NavigationProperty Name="Cuenta" Relationship="Self.FK_Movimientos_Cuentas" FromRole="Movimientos" ToRole="Cuentas" />
           <NavigationProperty Name="Transaccion" Relationship="Self.FK_Movimientos_Transacciones" FromRole="Movimientos" ToRole="Transacciones" />
+          <Property Name="EsContrasiento" Type="Boolean" Nullable="false" />
+          <Property Name="FechaGrabacion" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="Rubro">
           <Key>
@@ -214,6 +186,8 @@
           <EntitySetMapping Name="Movimientos">
             <EntityTypeMapping TypeName="GastosModel.Movimiento">
               <MappingFragment StoreEntitySet="Movimientos">
+                <ScalarProperty Name="FechaGrabacion" ColumnName="FechaGrabacion" />
+                <ScalarProperty Name="EsContrasiento" ColumnName="EsContrasiento" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="FechaMovimiento" ColumnName="FechaMovimiento" />
                 <ScalarProperty Name="IdTransaccion" ColumnName="IdTransaccion" />
