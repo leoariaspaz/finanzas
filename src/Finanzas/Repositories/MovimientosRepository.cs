@@ -61,5 +61,22 @@ namespace Finanzas.Repositories
                 return db.Movimientos.Find(idMovimiento);
             }
         }
+
+        internal static void Actualizar(decimal id, int idCuenta, DateTime fecha, int idTransaccion, decimal importe)
+        {
+            using (var db = new GastosEntities())
+            {
+                if (!db.Movimientos.Any(t => t.Id == id))
+                {
+                    throw new Exception("No existe el movimiento con Id " + id);
+                }
+                var m = db.Movimientos.Find(id);
+                m.IdCuenta = idCuenta;
+                m.FechaMovimiento = fecha;
+                m.IdTransaccion = idTransaccion;
+                m.Importe = importe;
+                db.SaveChanges();
+            }
+        }
     }
 }

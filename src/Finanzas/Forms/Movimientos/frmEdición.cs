@@ -44,10 +44,11 @@ namespace Finanzas.Forms.Movimientos
             txtImporte.Text = String.Format("{0:n}", 0);
         }
 
-        public frmEdición(Movimiento movimiento)
+        public frmEdición(Movimiento movimiento): this()
         {
             cbCuentas.SelectedValue = movimiento.IdCuenta;
-            cbRubros.SelectedValue = movimiento.Transaccion.IdRubro;
+            dtFecha.Value = movimiento.FechaMovimiento;
+            cbRubros.SelectedValue = TransaccionesRepository.ObtenerTransaccionPorId(movimiento.IdTransaccion).IdRubro;
             CargarTransacciones();
             cbTransacciones.SelectedValue = movimiento.IdTransaccion;
             txtImporte.Text = String.Format("{0:n}", movimiento.Importe);

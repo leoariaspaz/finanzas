@@ -121,7 +121,19 @@ namespace Finanzas.Forms.Movimientos
             var m = MovimientosRepository.ObtenerMovimientoPorId(id);
             using (var f = new frmEdición(m))
             {
-
+                if (f.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        MovimientosRepository.Actualizar(m.Id, f.IdCuenta, f.Fecha, f.IdTransaccion, f.Importe);
+                        ConsultarDatos();
+                        dgvDatos.Posicionar(r => Convert.ToDecimal(r.Cells[0].Value) == m.Id);
+                    }
+                    catch (Exception ex)
+                    {
+                        CustomMessageBox.ShowError(ex.Message);
+                    }
+                }
             }
         }
 
