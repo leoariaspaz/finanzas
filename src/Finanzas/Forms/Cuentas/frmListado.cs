@@ -10,6 +10,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Finanzas.Lib.Extensions;
+using CustomLibrary.Extensions.Collections;
+using CustomLibrary.Extensions.Controls;
 
 namespace Finanzas.Forms.Cuentas
 {
@@ -107,7 +109,7 @@ namespace Finanzas.Forms.Cuentas
                     {
                         CustomMessageBox.ShowError(ex.Message);
                     }
-                    dgvDatos.Posicionar(r => r.Cells[1].Value.ToString().ToLower() == f.Descripción.Trim().ToLower());
+                    dgvDatos.SetRow(r => r.Cells[1].Value.ToString().ToLower() == f.Descripción.Trim().ToLower());
                 }
             }
         }
@@ -130,7 +132,7 @@ namespace Finanzas.Forms.Cuentas
                     {
                         CustomMessageBox.ShowError(ex.Message);
                     }
-                    dgvDatos.Posicionar(r => Int32.Parse(r.Cells[0].Value.ToString()) == cta.Id);
+                    dgvDatos.SetRow(r => Int32.Parse(r.Cells[0].Value.ToString()) == cta.Id);
                 }
             }
         }

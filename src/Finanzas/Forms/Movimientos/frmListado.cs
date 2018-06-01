@@ -10,6 +10,8 @@ using System.Windows.Forms;
 using Finanzas.Models;
 using Finanzas.Lib.Extensions;
 using Finanzas.Repositories;
+using CustomLibrary.Extensions.Collections;
+using CustomLibrary.Extensions.Controls;
 
 namespace Finanzas.Forms.Movimientos
 {
@@ -118,7 +120,7 @@ namespace Finanzas.Forms.Movimientos
                         var mov = MovimientosRepository.Insertar(f.IdCuenta, f.Fecha, f.IdTransaccion, f.Importe);
                         cbCuentas.SelectedValue = mov.IdCuenta;
                         ConsultarDatos();
-                        dgvDatos.Posicionar(r => Convert.ToDecimal(r.Cells[0].Value) == mov.Id);
+                        dgvDatos.SetRow(r => Convert.ToDecimal(r.Cells[0].Value) == mov.Id);
                     }
                     catch (Exception ex)
                     {
@@ -141,7 +143,7 @@ namespace Finanzas.Forms.Movimientos
                     {
                         MovimientosRepository.Actualizar(m.Id, f.IdCuenta, f.Fecha, f.IdTransaccion, f.Importe);
                         ConsultarDatos();
-                        dgvDatos.Posicionar(r => Convert.ToDecimal(r.Cells[0].Value) == m.Id);
+                        dgvDatos.SetRow(r => Convert.ToDecimal(r.Cells[0].Value) == m.Id);
                     }
                     catch (Exception ex)
                     {
@@ -163,7 +165,7 @@ namespace Finanzas.Forms.Movimientos
                 {
                     MovimientosRepository.Contrasentar(m.Id);
                     ConsultarDatos();
-                    dgvDatos.Posicionar(r => Convert.ToDecimal(r.Cells[0].Value) == m.Id);
+                    dgvDatos.SetRow(r => Convert.ToDecimal(r.Cells[0].Value) == m.Id);
                 }
                 catch (Exception ex)
                 {

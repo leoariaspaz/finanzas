@@ -36,7 +36,7 @@
             this.ediciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rubrosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.transaccionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.bevel1 = new CustomLibrary.Forms.Bevel();
+            this.bevel1 = new CustomLibrary.ComponentModel.Bevel();
             this.cuentasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -107,8 +107,8 @@
             // 
             // bevel1
             // 
-            this.bevel1.BevelStyle = CustomLibrary.Forms.BevelStyle.Lowered;
-            this.bevel1.BevelType = CustomLibrary.Forms.BevelType.Box;
+            this.bevel1.BevelStyle = CustomLibrary.ComponentModel.BevelStyle.Lowered;
+            this.bevel1.BevelType = CustomLibrary.ComponentModel.BevelType.Box;
             this.bevel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.bevel1.HighlightColor = System.Drawing.SystemColors.ButtonHighlight;
             this.bevel1.Location = new System.Drawing.Point(0, 24);
@@ -150,7 +150,7 @@
         private System.Windows.Forms.ToolStripMenuItem salirToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ediciónToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem rubrosToolStripMenuItem;
-        private CustomLibrary.Forms.Bevel bevel1;
+        private CustomLibrary.ComponentModel.Bevel bevel1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem consultarMovimientosToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem transaccionesToolStripMenuItem;

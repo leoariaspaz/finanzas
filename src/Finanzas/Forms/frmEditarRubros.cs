@@ -6,6 +6,8 @@ using System.Linq;
 using System.Windows.Forms;
 using Finanzas.Lib.Extensions;
 using Finanzas.Repositories;
+using CustomLibrary.Extensions.Collections;
+using CustomLibrary.Extensions.Controls;
 
 namespace Finanzas.Forms
 {
@@ -46,7 +48,7 @@ namespace Finanzas.Forms
                     {
                         CustomMessageBox.ShowError(ex.Message);
                     }
-                    dgvDatos.Posicionar(r => r.Cells[1].Value.ToString().ToLower().Equals(descripción.ToLower()));
+                    dgvDatos.SetRow(r => r.Cells[1].Value.ToString().ToLower().Equals(descripción.ToLower()));
                 }
             }
         }
@@ -70,7 +72,7 @@ namespace Finanzas.Forms
                 {
                     CustomMessageBox.ShowError(ex.Message);
                 }
-                dgvDatos.Posicionar(r => r.Cells[1].Value.ToString().ToLower().Equals(descripción.ToLower()));
+                dgvDatos.SetRow(r => r.Cells[1].Value.ToString().ToLower().Equals(descripción.ToLower()));
             }
         }
 

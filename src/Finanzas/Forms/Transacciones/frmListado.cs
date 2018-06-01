@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Finanzas.Lib.Extensions;
 using Finanzas.Repositories;
+using CustomLibrary.Extensions.Controls;
 
 namespace Finanzas.Forms.Transacciones
 {
@@ -122,7 +123,7 @@ namespace Finanzas.Forms.Transacciones
                     {
                         CustomMessageBox.ShowError(ex.Message);
                     }
-                    dgvDatos.Posicionar(r => r.Cells[1].Value.ToString().ToLower() == f.Descripción.Trim().ToLower());
+                    dgvDatos.SetRow(r => r.Cells[1].Value.ToString().ToLower() == f.Descripción.Trim().ToLower());
                 }
             }
         }
@@ -146,7 +147,7 @@ namespace Finanzas.Forms.Transacciones
                     {
                         CustomMessageBox.ShowError(ex.Message);
                     }
-                    dgvDatos.Posicionar(r => Int32.Parse(r.Cells[0].Value.ToString()) == trx.Id);
+                    dgvDatos.SetRow(r => Int32.Parse(r.Cells[0].Value.ToString()) == trx.Id);
                 }
             }
         }
