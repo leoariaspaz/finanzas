@@ -50,7 +50,7 @@
   <ItemGroup>
     <Reference Include="CustomLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\lib\dotnet-customlibrary\src\CustomLibrary\bin\Release\CustomLibrary.dll</HintPath>
+      <HintPath>..\..\..\dotnet-customlibrary\src\CustomLibrary\bin\Release\CustomLibrary.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
@@ -92,6 +92,12 @@
     </Compile>
     <Compile Include="Forms\frmEditarRubros.Designer.cs">
       <DependentUpon>frmEditarRubros.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmLogin.Designer.cs">
+      <DependentUpon>frmLogin.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Movimientos\frmEdición.cs">
       <SubType>Form</SubType>
@@ -160,15 +166,22 @@
     <Compile Include="Models\Transaccion.cs">
       <DependentUpon>Finanzas.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Usuario.cs">
+      <DependentUpon>Finanzas.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ViewModel\Movimiento.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\CuentasRepository.cs" />
+    <Compile Include="Repositories\UsuariosRepository.cs" />
     <Compile Include="Repositories\MovimientosRepository.cs" />
     <Compile Include="Repositories\RubrosRepository.cs" />
     <Compile Include="Repositories\TransaccionesRepository.cs" />
     <EmbeddedResource Include="Forms\Cuentas\frmEdición.resx">
       <DependentUpon>frmEdición.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmLogin.resx">
+      <DependentUpon>frmLogin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Movimientos\frmEdición.resx">
       <DependentUpon>frmEdición.cs</DependentUpon>
@@ -233,7 +246,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -262,7 +277,9 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Forms\Usuarios\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

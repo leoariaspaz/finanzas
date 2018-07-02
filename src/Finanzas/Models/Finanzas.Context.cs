@@ -29,5 +29,6 @@ namespace Finanzas.Models
         public virtual DbSet<Movimiento> Movimientos { get; set; }
         public virtual DbSet<Rubro> Rubros { get; set; }
         public virtual DbSet<Transaccion> Transacciones { get; set; }
+        public virtual DbSet<Usuario> Usuarios { get; set; }
     }
 }

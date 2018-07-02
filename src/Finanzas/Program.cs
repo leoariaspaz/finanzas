@@ -17,7 +17,15 @@ namespace Finanzas
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmPrincipal());
+            var f = new frmPrincipal();
+            if (f.Inicializar())
+            {
+                Application.Run(f);
+            }
+            else
+            {
+                Application.Exit();
+            }
         }
     }
 }
