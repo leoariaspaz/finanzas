@@ -34,7 +34,7 @@
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnAceptar = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.txtImporte = new System.Windows.Forms.TextBox();
+            this.txtImporte = new CustomLibrary.ComponentModel.NumericTextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.cbTransacciones = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -117,6 +117,7 @@
             // 
             // txtImporte
             // 
+            this.txtImporte.Digits = 2;
             this.txtImporte.Location = new System.Drawing.Point(99, 116);
             this.txtImporte.Name = "txtImporte";
             this.txtImporte.Size = new System.Drawing.Size(145, 20);
@@ -245,7 +246,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox cbRubros;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox txtImporte;
+        private CustomLibrary.ComponentModel.NumericTextBox txtImporte;
         private System.Windows.Forms.Label label5;
     }
 }
