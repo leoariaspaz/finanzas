@@ -32,7 +32,16 @@ namespace Finanzas.Forms.Cuentas
 
         private void ConsultarDatos()
         {
-            dgvDatos.DataSource = (from c in CuentasRepository.ObtenerCuentas()
+            //dgvDatos.DataSource = (from c in CuentasRepository.ObtenerCuentas()
+            //                       select new
+            //                       {
+            //                           c.Id,
+            //                           c.Descripcion,
+            //                           c.SaldoInicial,
+            //                           DescripciónEstado = (c.Estado == 1 ? "Activa" : "Baja"),
+            //                           c.Estado
+            //                       }).ToSortableBindingList();
+            dgvDatos.SetDataSource(from c in CuentasRepository.ObtenerCuentas()
                                    select new
                                    {
                                        c.Id,
@@ -40,7 +49,7 @@ namespace Finanzas.Forms.Cuentas
                                        c.SaldoInicial,
                                        DescripciónEstado = (c.Estado == 1 ? "Activa" : "Baja"),
                                        c.Estado
-                                   }).ToSortableBindingList();
+                                   });
         }
 
         private void dgvDatos_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)

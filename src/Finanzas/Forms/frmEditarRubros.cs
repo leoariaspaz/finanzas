@@ -21,9 +21,10 @@ namespace Finanzas.Forms
 
         private void ConsultarDatos()
         {
-            dgvDatos.DataSource = RubrosRepository.ObtenerRubros()
-                                    .OrderBy(r => r.Descripcion)
-                                    .ToSortableBindingList(t => new Tuple<int, string>(t.Id, t.Descripcion));
+            //dgvDatos.DataSource = RubrosRepository.ObtenerRubros()
+            //                        .OrderBy(r => r.Descripcion)
+            //                        .ToSortableBindingList(t => new Tuple<int, string>(t.Id, t.Descripcion));
+            dgvDatos.SetDataSource(RubrosRepository.ObtenerRubros().OrderBy(r => r.Descripcion));
         }
 
         private void btnSalir_Click(object sender, EventArgs e)

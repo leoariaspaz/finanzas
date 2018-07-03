@@ -33,5 +33,13 @@ namespace Finanzas.Forms
                 new ToolTip().ShowError(this, txtUsuario, "El usuario o la contraseña son incorrectos.");
             }
         }
+
+        private void frmLogin_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                this.Close();
+            }
+        }
     }
 }

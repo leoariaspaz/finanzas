@@ -38,8 +38,9 @@ namespace Finanzas.Forms.Movimientos
 
         private void ConsultarDatos()
         {
-            dgvDatos.DataSource = MovimientosRepository.ObtenerMovimientosPorCuenta(IdCuenta)
-                                    .ToSortableBindingList();
+            //dgvDatos.DataSource = MovimientosRepository.ObtenerMovimientosPorCuenta(IdCuenta)
+            //                        .ToSortableBindingList();
+            dgvDatos.SetDataSource(MovimientosRepository.ObtenerMovimientosPorCuenta(IdCuenta));
             dgvDatos.Columns[0].Visible = false;
         }
 

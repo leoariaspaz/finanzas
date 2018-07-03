@@ -21,6 +21,5 @@ namespace Finanzas.Models
         public byte Estado { get; set; }
         public Nullable<System.DateTime> FechaBaja { get; set; }
         public string NombreCompleto { get; set; }
-        public string Apellido { get; set; }
     }
 }

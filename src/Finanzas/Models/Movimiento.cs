@@ -19,8 +19,8 @@ namespace Finanzas.Models
         public int IdTransaccion { get; set; }
         public int IdCuenta { get; set; }
         public decimal Importe { get; set; }
-        public bool EsContrasiento { get; set; }
         public System.DateTime FechaGrabacion { get; set; }
+        public bool EsContrasiento { get; set; }
     
         public virtual Cuenta Cuenta { get; set; }
         public virtual Transaccion Transaccion { get; set; }
