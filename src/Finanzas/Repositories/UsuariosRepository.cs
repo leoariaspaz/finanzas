@@ -10,13 +10,9 @@ namespace Finanzas.Repositories
 {
     public class UsuariosRepository
     {
-        public bool VerificarLoginUsuario(string usuario, string contraseña)
+        public bool VerificarLoginUsuario(string nombre, string contraseña)
         {
-            Usuario usr = null;
-            using (var db = new GastosEntities())
-            {
-                usr = (from u in db.Usuarios where u.Nombre.ToLower() == usuario.ToLower() select u).FirstOrDefault();
-            }
+            Usuario usr = ObtenerUsuario(nombre);            
             if (usr == null)
             {
                 return false;
@@ -28,6 +24,14 @@ namespace Finanzas.Repositories
                 hash = BitConverter.ToString(alg.Hash);
             }
             return usr.Contraseña == hash;
+        }
+
+        internal Usuario ObtenerUsuario(string nombre)
+        {
+            using (var db = new GastosEntities())
+            {
+                return (from u in db.Usuarios where u.Nombre.ToLower() == nombre.ToLower() select u).FirstOrDefault();
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Finanzas.Models;
+﻿using Finanzas.Lib;
+using Finanzas.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,7 +48,9 @@ namespace Finanzas.Repositories
                     IdCuenta = idCuenta,
                     FechaMovimiento = fecha,
                     IdTransaccion = idTransaccion,
-                    Importe = importe
+                    Importe = importe,
+                    FechaGrabacion = Configuration.CurrentDate,
+                    IdUsuario = Session.CurrentUser.Id
                 };
                 db.Movimientos.Add(m);
                 db.SaveChanges();

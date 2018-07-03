@@ -13,6 +13,7 @@
         <AssociationConnector Association="GastosModel.FK_Movimientos_Transacciones" ManuallyRouted="false" />
         <AssociationConnector Association="GastosModel.FK_Transacciones_Rubros" ManuallyRouted="false" />
         <EntityTypeShape EntityType="GastosModel.Usuario" Width="1.5" PointX="5.375" PointY="4.75" />
+        <AssociationConnector Association="GastosModel.FK_Movimientos_Usuarios" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

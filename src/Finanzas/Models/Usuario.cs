@@ -14,6 +14,12 @@ namespace Finanzas.Models
     
     public partial class Usuario
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Usuario()
+        {
+            this.Movimientos = new HashSet<Movimiento>();
+        }
+    
         public int Id { get; set; }
         public string Nombre { get; set; }
         public string Contraseña { get; set; }
@@ -21,5 +27,8 @@ namespace Finanzas.Models
         public byte Estado { get; set; }
         public Nullable<System.DateTime> FechaBaja { get; set; }
         public string NombreCompleto { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Movimiento> Movimientos { get; set; }
     }
 }

@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Finanzas.Lib.Extensions;
+using Finanzas.Lib;
 
 namespace Finanzas.Forms
 {
@@ -22,9 +23,11 @@ namespace Finanzas.Forms
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            if (new UsuariosRepository().VerificarLoginUsuario(txtUsuario.Text, txtContraseña.Text))
+            var repo = new UsuariosRepository();
+            if (repo.VerificarLoginUsuario(txtUsuario.Text, txtContraseña.Text))
             {
                 errorProvider1.SetError(txtUsuario, "");
+                Session.CurrentUser = repo.ObtenerUsuario(txtUsuario.Text);
                 this.DialogResult = DialogResult.OK;
             }
             else

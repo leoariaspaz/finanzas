@@ -25,6 +25,7 @@
           <Property Name="Importe" Type="numeric" Precision="18" Scale="2" Nullable="false" />
           <Property Name="FechaGrabacion" Type="datetime" Nullable="false" />
           <Property Name="EsContrasiento" Type="bit" Nullable="false" />
+          <Property Name="IdUsuario" Type="int" />
         </EntityType>
         <EntityType Name="Rubros">
           <Key>
@@ -79,6 +80,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Movimientos_Usuarios">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
+          <End Role="Movimientos" Type="Self.Movimientos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Movimientos">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Transacciones_Rubros">
           <End Role="Rubros" Type="Self.Rubros" Multiplicity="1" />
           <End Role="Transacciones" Type="Self.Transacciones" Multiplicity="*" />
@@ -103,6 +116,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_Movimientos_Transacciones" Association="Self.FK_Movimientos_Transacciones">
             <End Role="Transacciones" EntitySet="Transacciones" />
+            <End Role="Movimientos" EntitySet="Movimientos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Movimientos_Usuarios" Association="Self.FK_Movimientos_Usuarios">
+            <End Role="Usuarios" EntitySet="Usuarios" />
             <End Role="Movimientos" EntitySet="Movimientos" />
           </AssociationSet>
           <AssociationSet Name="FK_Transacciones_Rubros" Association="Self.FK_Transacciones_Rubros">
@@ -137,6 +154,8 @@
           <NavigationProperty Name="Transaccion" Relationship="Self.FK_Movimientos_Transacciones" FromRole="Movimientos" ToRole="Transacciones" />
           <Property Name="FechaGrabacion" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="EsContrasiento" Type="Boolean" Nullable="false" />
+          <Property Name="IdUsuario" Type="Int32" />
+          <NavigationProperty Name="Usuario" Relationship="GastosModel.FK_Movimientos_Usuarios" FromRole="Movimiento" ToRole="Usuario" />
         </EntityType>
         <EntityType Name="Rubro">
           <Key>
@@ -212,6 +231,10 @@
             <End Role="Transacciones" EntitySet="Transacciones" />
           </AssociationSet>
           <EntitySet Name="Usuarios" EntityType="GastosModel.Usuario" />
+          <AssociationSet Name="FK_Movimientos_Usuarios" Association="GastosModel.FK_Movimientos_Usuarios">
+            <End Role="Usuario" EntitySet="Usuarios" />
+            <End Role="Movimiento" EntitySet="Movimientos" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Usuario">
           <Key>
@@ -224,7 +247,20 @@
           <Property Name="Estado" Type="Byte" Nullable="false" />
           <Property Name="FechaBaja" Type="DateTime" Precision="3" />
           <Property Name="NombreCompleto" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Movimientos" Relationship="GastosModel.FK_Movimientos_Usuarios" FromRole="Usuario" ToRole="Movimiento" />
         </EntityType>
+        <Association Name="FK_Movimientos_Usuarios">
+          <End Type="GastosModel.Usuario" Role="Usuario" Multiplicity="0..1" />
+          <End Type="GastosModel.Movimiento" Role="Movimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Movimiento">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -244,6 +280,7 @@
           <EntitySetMapping Name="Movimientos">
             <EntityTypeMapping TypeName="GastosModel.Movimiento">
               <MappingFragment StoreEntitySet="Movimientos">
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
                 <ScalarProperty Name="EsContrasiento" ColumnName="EsContrasiento" />
                 <ScalarProperty Name="FechaGrabacion" ColumnName="FechaGrabacion" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
