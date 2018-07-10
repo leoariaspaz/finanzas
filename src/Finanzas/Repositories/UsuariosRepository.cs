@@ -12,7 +12,7 @@ namespace Finanzas.Repositories
     {
         public bool VerificarLoginUsuario(string nombre, string contraseña)
         {
-            Usuario usr = ObtenerUsuario(nombre);            
+            Usuario usr = ObtenerUsuario(nombre);
             if (usr == null)
             {
                 return false;
@@ -33,5 +33,28 @@ namespace Finanzas.Repositories
                 return (from u in db.Usuarios where u.Nombre.ToLower() == nombre.ToLower() select u).FirstOrDefault();
             }
         }
+
+        public static IEnumerable<Usuario> ObtenerUsuarios()
+        {
+            using (var db = new GastosEntities())
+            {
+                //var query = (from u in db.Usuarios select u)
+                //                .ToList()
+                //                .Select(
+                //                    u => new Usuario
+                //                    {
+                //                        Id = u.Id,
+                //                        FechaAlta = u.FechaAlta,
+                //                        FechaBaja = u.FechaBaja,
+                //                        Nombre = u.Nombre,
+                //                        NombreCompleto = u.NombreCompleto,
+                //                        Estado = u.Estado
+                //                    });
+                //return query.ToList();
+
+                return (from u in db.Usuarios orderby u.Nombre select u).ToList();
+            }
+        }
     }
+
 }

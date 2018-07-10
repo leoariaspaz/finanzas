@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Finanzas.Lib;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -50,6 +51,11 @@ namespace Finanzas.Forms
         private void cuentasToolStripMenuItem_Click(object sender, EventArgs e)
         {
             using (var f = new Cuentas.frmListado()) f.ShowDialog();
+        }
+
+        private void usuariosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var f = new Usuarios.frmListado()) f.ShowDialog();
         }
     }
 }
