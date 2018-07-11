@@ -33,7 +33,7 @@ namespace Finanzas.Repositories
             {
                 if (db.Cuentas.Any(c => c.Descripcion == descripción))
                 {
-                    throw new Exception("Ya existe esta cuenta con este nombre.");
+                    throw new Exception("Ya existe una cuenta con este nombre.");
                 }
                 var id = db.Cuentas.Max(c => c.Id) + 1;
                 var cta = new Cuenta

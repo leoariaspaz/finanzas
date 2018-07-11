@@ -98,23 +98,25 @@ namespace Finanzas.Forms.Usuarios
 
         private void btnNuevo_Click(object sender, EventArgs e)
         {
-            //using (var f = new frmEdición(IdCuenta))
-            //{
-            //    if (f.ShowDialog() == DialogResult.OK)
-            //    {
-            //        try
-            //        {
-            //            var mov = MovimientosRepository.Insertar(f.IdCuenta, f.Fecha, f.IdTransaccion, f.Importe);
-            //            cbCuentas.SelectedValue = mov.IdCuenta;
-            //            ConsultarDatos();
-            //            dgvDatos.SetRow(r => Convert.ToDecimal(r.Cells[0].Value) == mov.Id);
-            //        }
-            //        catch (Exception ex)
-            //        {
-            //            CustomMessageBox.ShowError("Error al intentar grabar los datos: \n" + ex.Message);
-            //        }
-            //    }
-            //}
+            using (var f = new frmEdición())
+            {
+                if (f.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        var usr = UsuariosRepository.Insertar(f.Nombre, f.NombreCompleto, f.Estado);
+                        ConsultarDatos();
+                        dgvDatos.SetRow(r => Convert.ToDecimal(r.Cells[0].Value) == usr.Id);
+                        MessageBox.Show("Se dio de alta el usuario " + f.NombreCompleto + 
+                            "\nSe asignó la contraseña: 123456", "Nuevo usuario", 
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (Exception ex)
+                    {
+                        CustomMessageBox.ShowError("Error al intentar grabar los datos: \n" + ex.Message);
+                    }
+                }
+            }
         }
     }
 }

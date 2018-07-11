@@ -1,4 +1,5 @@
-﻿using Finanzas.Models;
+﻿using Finanzas.Lib;
+using Finanzas.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,13 +18,16 @@ namespace Finanzas.Repositories
             {
                 return false;
             }
-            string hash = "";
+            return usr.Contraseña == HashPassword(contraseña);
+        }
+
+        private static string HashPassword(string contraseña)
+        {
             using (var alg = SHA512.Create())
             {
                 alg.ComputeHash(Encoding.UTF8.GetBytes(contraseña));
-                hash = BitConverter.ToString(alg.Hash);
+                return BitConverter.ToString(alg.Hash);
             }
-            return usr.Contraseña == hash;
         }
 
         internal Usuario ObtenerUsuario(string nombre)
@@ -53,6 +57,31 @@ namespace Finanzas.Repositories
                 //return query.ToList();
 
                 return (from u in db.Usuarios orderby u.Nombre select u).ToList();
+            }
+        }
+
+        internal static Usuario Insertar(string nombre, string nombreCompleto, byte estado)
+        {
+            using (var db = new GastosEntities())
+            {
+                if (db.Usuarios.Any(c => c.Nombre.ToLower().Trim() == nombre.ToLower().Trim()))
+                {
+                    throw new Exception("Ya existe un usuario con este nombre.");
+                }
+                var id = db.Usuarios.Max(c => c.Id) + 1;
+                var usr = new Usuario
+                {
+                    Id = id,
+                    Nombre = nombre,
+                    NombreCompleto = nombreCompleto,
+                    FechaAlta = Configuration.CurrentDate,
+                    Estado = estado,
+                    FechaBaja = estado == 1 ? (DateTime?) null : Configuration.CurrentDate,
+                    Contraseña = HashPassword("123456")
+                };
+                db.Usuarios.Add(usr);
+                db.SaveChanges();
+                return usr;
             }
         }
     }

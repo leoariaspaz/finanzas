@@ -220,6 +220,9 @@
     <EmbeddedResource Include="Forms\frmPrincipal.resx">
       <DependentUpon>frmPrincipal.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Usuarios\frmEdición.resx">
+      <DependentUpon>frmEdición.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Usuarios\frmListado.resx">
       <DependentUpon>frmListado.cs</DependentUpon>
     </EmbeddedResource>

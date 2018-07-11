@@ -23,8 +23,8 @@
           <Property Name="IdTransaccion" Type="int" Nullable="false" />
           <Property Name="IdCuenta" Type="int" Nullable="false" />
           <Property Name="Importe" Type="numeric" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="FechaGrabacion" Type="datetime" Nullable="false" />
           <Property Name="EsContrasiento" Type="bit" Nullable="false" />
+          <Property Name="FechaGrabacion" Type="datetime" Nullable="false" />
           <Property Name="IdUsuario" Type="int" />
         </EntityType>
         <EntityType Name="Rubros">
@@ -48,7 +48,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="None" />
           <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Contraseña" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="FechaAlta" Type="datetime" Nullable="false" />
@@ -56,30 +56,6 @@
           <Property Name="FechaBaja" Type="datetime" />
           <Property Name="NombreCompleto" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <Association Name="FK_Movimientos_Cuentas">
-          <End Role="Cuentas" Type="Self.Cuentas" Multiplicity="1" />
-          <End Role="Movimientos" Type="Self.Movimientos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cuentas">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Movimientos">
-              <PropertyRef Name="IdCuenta" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Movimientos_Transacciones">
-          <End Role="Transacciones" Type="Self.Transacciones" Multiplicity="1" />
-          <End Role="Movimientos" Type="Self.Movimientos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Transacciones">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Movimientos">
-              <PropertyRef Name="IdTransaccion" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Movimientos_Usuarios">
           <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
           <End Role="Movimientos" Type="Self.Movimientos" Multiplicity="*" />
@@ -110,14 +86,6 @@
           <EntitySet Name="Rubros" EntityType="Self.Rubros" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Transacciones" EntityType="Self.Transacciones" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Movimientos_Cuentas" Association="Self.FK_Movimientos_Cuentas">
-            <End Role="Cuentas" EntitySet="Cuentas" />
-            <End Role="Movimientos" EntitySet="Movimientos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Movimientos_Transacciones" Association="Self.FK_Movimientos_Transacciones">
-            <End Role="Transacciones" EntitySet="Transacciones" />
-            <End Role="Movimientos" EntitySet="Movimientos" />
-          </AssociationSet>
           <AssociationSet Name="FK_Movimientos_Usuarios" Association="Self.FK_Movimientos_Usuarios">
             <End Role="Usuarios" EntitySet="Usuarios" />
             <End Role="Movimientos" EntitySet="Movimientos" />
@@ -240,7 +208,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="None" />
           <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Contraseña" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="FechaAlta" Type="DateTime" Nullable="false" Precision="3" />
