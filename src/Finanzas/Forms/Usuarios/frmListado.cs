@@ -118,5 +118,28 @@ namespace Finanzas.Forms.Usuarios
                 }
             }
         }
+
+        private void btnEditar_Click(object sender, EventArgs e)
+        {
+            int rowindex = dgvDatos.CurrentCell.RowIndex;
+            var id = (int)dgvDatos.Rows[rowindex].Cells[0].Value;
+            var usr = UsuariosRepository.ObtenerUsuarioPorId(id);
+            using (var f = new frmEdición(usr))
+            {
+                if (f.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        UsuariosRepository.Actualizar(usr.Id, f.Nombre, f.NombreCompleto, f.Estado);
+                        ConsultarDatos();
+                        dgvDatos.SetRow(r => Convert.ToDecimal(r.Cells[0].Value) == usr.Id);
+                    }
+                    catch (Exception ex)
+                    {
+                        CustomMessageBox.ShowError(ex.Message);
+                    }
+                }
+            }
+        }
     }
 }

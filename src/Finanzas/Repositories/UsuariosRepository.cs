@@ -84,6 +84,30 @@ namespace Finanzas.Repositories
                 return usr;
             }
         }
+
+        internal static Usuario ObtenerUsuarioPorId(decimal id)
+        {
+            using (var db = new GastosEntities())
+            {
+                return db.Usuarios.Find(id);
+            }
+        }
+
+        internal static void Actualizar(int id, string nombre, string nombreCompleto, byte estado)
+        {
+            using (var db = new GastosEntities())
+            {
+                if (!db.Usuarios.Any(t => t.Id == id))
+                {
+                    throw new Exception("No existe la cuenta con Id " + id);
+                }
+                var u = db.Usuarios.Find(id);
+                u.Nombre = nombre.Trim();
+                u.NombreCompleto = nombreCompleto.Trim();
+                u.Estado = estado;
+                db.SaveChanges();
+            }
+        }
     }
 
 }

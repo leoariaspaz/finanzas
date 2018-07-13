@@ -26,6 +26,7 @@ namespace Finanzas.Forms.Usuarios
         }
 
         public frmEdición(Usuario usuario)
+            : this()
         {
             if (usuario == null)
             {
