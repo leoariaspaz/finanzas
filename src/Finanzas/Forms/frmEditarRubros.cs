@@ -121,8 +121,9 @@ namespace Finanzas.Forms
             dgvDatos.Columns[1].HeaderText = "Descripción";
             dgvDatos.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dgvDatos.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-
             dgvDatos.Columns[1].HeaderCell.SortGlyphDirection = SortOrder.Descending;
+
+            dgvDatos.Columns[2].Visible = false;
         }
 
         private void frmEditarRubros_KeyDown(object sender, KeyEventArgs e)

@@ -45,6 +45,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.bevel1 = new CustomLibrary.ComponentModel.Bevel();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -70,16 +71,18 @@
             // 
             this.panel1.Controls.Add(this.btnCancelar);
             this.panel1.Controls.Add(this.btnAceptar);
+            this.panel1.Controls.Add(this.bevel1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(3, 159);
+            this.panel1.Location = new System.Drawing.Point(0, 156);
+            this.panel1.Margin = new System.Windows.Forms.Padding(0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(384, 29);
+            this.panel1.Size = new System.Drawing.Size(390, 35);
             this.panel1.TabIndex = 0;
             // 
             // btnCancelar
             // 
             this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancelar.Location = new System.Drawing.Point(300, 3);
+            this.btnCancelar.Location = new System.Drawing.Point(300, 6);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 23);
             this.btnCancelar.TabIndex = 1;
@@ -89,7 +92,7 @@
             // btnAceptar
             // 
             this.btnAceptar.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnAceptar.Location = new System.Drawing.Point(219, 3);
+            this.btnAceptar.Location = new System.Drawing.Point(219, 6);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(75, 23);
             this.btnAceptar.TabIndex = 0;
@@ -211,6 +214,20 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // bevel1
+            // 
+            this.bevel1.BevelStyle = CustomLibrary.ComponentModel.BevelStyle.Raised;
+            this.bevel1.BevelType = CustomLibrary.ComponentModel.BevelType.TopLine;
+            this.bevel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.bevel1.HighlightColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.bevel1.Location = new System.Drawing.Point(0, 0);
+            this.bevel1.Margin = new System.Windows.Forms.Padding(0);
+            this.bevel1.Name = "bevel1";
+            this.bevel1.ShadowColor = System.Drawing.SystemColors.ButtonShadow;
+            this.bevel1.Size = new System.Drawing.Size(390, 23);
+            this.bevel1.TabIndex = 3;
+            this.bevel1.Text = "bevel1";
+            // 
             // frmEdición
             // 
             this.AcceptButton = this.btnAceptar;
@@ -248,5 +265,6 @@
         private System.Windows.Forms.Label label3;
         private CustomLibrary.ComponentModel.NumericTextBox txtImporte;
         private System.Windows.Forms.Label label5;
+        private CustomLibrary.ComponentModel.Bevel bevel1;
     }
 }

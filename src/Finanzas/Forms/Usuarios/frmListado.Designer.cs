@@ -33,7 +33,7 @@
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnNuevo = new System.Windows.Forms.ToolStripButton();
             this.btnEditar = new System.Windows.Forms.ToolStripButton();
-            this.btnEliminar = new System.Windows.Forms.ToolStripButton();
+            this.btnReiniciarContraseña = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
             this.tableLayoutPanel1.SuspendLayout();
@@ -80,7 +80,7 @@
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnNuevo,
             this.btnEditar,
-            this.btnEliminar,
+            this.btnReiniciarContraseña,
             this.toolStripSeparator1,
             this.btnSalir});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
@@ -97,7 +97,7 @@
             this.btnNuevo.Name = "btnNuevo";
             this.btnNuevo.Size = new System.Drawing.Size(23, 22);
             this.btnNuevo.Text = "toolStripButton1";
-            this.btnNuevo.ToolTipText = "Nuevo";
+            this.btnNuevo.ToolTipText = "Nuevo (Ctrl + N)";
             this.btnNuevo.Click += new System.EventHandler(this.btnNuevo_Click);
             // 
             // btnEditar
@@ -107,19 +107,20 @@
             this.btnEditar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnEditar.Name = "btnEditar";
             this.btnEditar.Size = new System.Drawing.Size(23, 22);
-            this.btnEditar.Text = "toolStripButton2";
+            this.btnEditar.Text = "Editar (Ctrl + F4)";
             this.btnEditar.ToolTipText = "Editar";
             this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
             // 
-            // btnEliminar
+            // btnReiniciarContraseña
             // 
-            this.btnEliminar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnEliminar.Image = global::Finanzas.Properties.Resources.cross;
-            this.btnEliminar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(23, 22);
-            this.btnEliminar.Text = "toolStripButton3";
-            this.btnEliminar.ToolTipText = "Eliminar";
+            this.btnReiniciarContraseña.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnReiniciarContraseña.Image = global::Finanzas.Properties.Resources.arrow_refresh;
+            this.btnReiniciarContraseña.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnReiniciarContraseña.Name = "btnReiniciarContraseña";
+            this.btnReiniciarContraseña.Size = new System.Drawing.Size(23, 22);
+            this.btnReiniciarContraseña.Text = "toolStripButton3";
+            this.btnReiniciarContraseña.ToolTipText = "Reinicar contraseña";
+            this.btnReiniciarContraseña.Click += new System.EventHandler(this.btnReiniciarContraseña_Click);
             // 
             // toolStripSeparator1
             // 
@@ -134,7 +135,7 @@
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(23, 22);
             this.btnSalir.Text = "toolStripButton4";
-            this.btnSalir.ToolTipText = "Salir";
+            this.btnSalir.ToolTipText = "Salir (Escape)";
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
             // frmListado
@@ -163,7 +164,7 @@
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton btnNuevo;
         private System.Windows.Forms.ToolStripButton btnEditar;
-        private System.Windows.Forms.ToolStripButton btnEliminar;
+        private System.Windows.Forms.ToolStripButton btnReiniciarContraseña;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton btnSalir;
     }

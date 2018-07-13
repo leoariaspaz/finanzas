@@ -40,6 +40,7 @@
             this.txtDescripción = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.bevel1 = new CustomLibrary.ComponentModel.Bevel();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -58,23 +59,25 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(390, 147);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(390, 121);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
             // panel1
             // 
             this.panel1.Controls.Add(this.btnCancelar);
             this.panel1.Controls.Add(this.btnAceptar);
+            this.panel1.Controls.Add(this.bevel1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(3, 115);
+            this.panel1.Location = new System.Drawing.Point(0, 86);
+            this.panel1.Margin = new System.Windows.Forms.Padding(0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(384, 29);
+            this.panel1.Size = new System.Drawing.Size(390, 35);
             this.panel1.TabIndex = 0;
             // 
             // btnCancelar
             // 
             this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancelar.Location = new System.Drawing.Point(300, 3);
+            this.btnCancelar.Location = new System.Drawing.Point(300, 7);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 23);
             this.btnCancelar.TabIndex = 1;
@@ -84,7 +87,7 @@
             // btnAceptar
             // 
             this.btnAceptar.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnAceptar.Location = new System.Drawing.Point(219, 3);
+            this.btnAceptar.Location = new System.Drawing.Point(219, 7);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(75, 23);
             this.btnAceptar.TabIndex = 0;
@@ -102,7 +105,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(3, 3);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(384, 106);
+            this.panel2.Size = new System.Drawing.Size(384, 80);
             this.panel2.TabIndex = 1;
             // 
             // txtSaldoInicial
@@ -153,13 +156,27 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // bevel1
+            // 
+            this.bevel1.BevelStyle = CustomLibrary.ComponentModel.BevelStyle.Raised;
+            this.bevel1.BevelType = CustomLibrary.ComponentModel.BevelType.TopLine;
+            this.bevel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.bevel1.HighlightColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.bevel1.Location = new System.Drawing.Point(0, 0);
+            this.bevel1.Margin = new System.Windows.Forms.Padding(0);
+            this.bevel1.Name = "bevel1";
+            this.bevel1.ShadowColor = System.Drawing.SystemColors.ButtonShadow;
+            this.bevel1.Size = new System.Drawing.Size(390, 23);
+            this.bevel1.TabIndex = 2;
+            this.bevel1.Text = "bevel1";
+            // 
             // frmEdición
             // 
             this.AcceptButton = this.btnAceptar;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancelar;
-            this.ClientSize = new System.Drawing.Size(390, 147);
+            this.ClientSize = new System.Drawing.Size(390, 121);
             this.Controls.Add(this.tableLayoutPanel1);
             this.KeyPreview = true;
             this.Name = "frmEdición";
@@ -187,5 +204,6 @@
         private System.Windows.Forms.TextBox txtSaldoInicial;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        private CustomLibrary.ComponentModel.Bevel bevel1;
     }
 }

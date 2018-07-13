@@ -99,7 +99,7 @@ namespace Finanzas.Repositories
             {
                 if (!db.Usuarios.Any(t => t.Id == id))
                 {
-                    throw new Exception("No existe la cuenta con Id " + id);
+                    throw new Exception("No existe el usuario con Id " + id);
                 }
                 var u = db.Usuarios.Find(id);
                 u.Nombre = nombre.Trim();
@@ -107,6 +107,20 @@ namespace Finanzas.Repositories
                 u.Estado = estado;
                 db.SaveChanges();
             }
+        }
+
+        internal static void ReiniciarContraseña(int id)
+        {
+            using (var db = new GastosEntities())
+            {
+                if (!db.Usuarios.Any(t => t.Id == id))
+                {
+                    throw new Exception("No existe el usuario con Id " + id);
+                }
+                var u = db.Usuarios.Find(id);
+                u.Contraseña = HashPassword("123456");
+                db.SaveChanges();
+            }            
         }
     }
 

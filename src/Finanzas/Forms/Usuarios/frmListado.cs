@@ -88,7 +88,7 @@ namespace Finanzas.Forms.Usuarios
             if (e.KeyCode == Keys.Escape) btnSalir.PerformClick();
             else if (e.Control && e.KeyCode == Keys.N) btnNuevo.PerformClick();
             else if (e.Control && e.KeyCode == Keys.F4) btnEditar.PerformClick();
-            else if (e.Control && e.KeyCode == Keys.Delete) btnEliminar.PerformClick();
+            else if (e.Control && e.KeyCode == Keys.Delete) btnReiniciarContraseña.PerformClick();
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
@@ -139,6 +139,19 @@ namespace Finanzas.Forms.Usuarios
                         CustomMessageBox.ShowError(ex.Message);
                     }
                 }
+            }
+        }
+
+        private void btnReiniciarContraseña_Click(object sender, EventArgs e)
+        {
+            int rowindex = dgvDatos.CurrentCell.RowIndex;
+            var nombre = (string)dgvDatos.Rows[rowindex].Cells[1].Value;
+            var result = MessageBox.Show("Se asignará la contraseña 123456 al usuario " + nombre + ".\n¿Desea continuar?", 
+                "Reiniciar contraseña", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                var id = (int)dgvDatos.Rows[rowindex].Cells[0].Value;
+                UsuariosRepository.ReiniciarContraseña(id);
             }
         }
     }

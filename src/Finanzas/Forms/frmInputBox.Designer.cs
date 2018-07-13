@@ -35,6 +35,7 @@
             this.txtInput = new System.Windows.Forms.TextBox();
             this.lblCaption = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.bevel1 = new CustomLibrary.ComponentModel.Bevel();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
@@ -45,16 +46,17 @@
             this.panel1.Controls.Add(this.btnAceptar);
             this.panel1.Controls.Add(this.txtInput);
             this.panel1.Controls.Add(this.lblCaption);
+            this.panel1.Controls.Add(this.bevel1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(308, 89);
+            this.panel1.Size = new System.Drawing.Size(308, 90);
             this.panel1.TabIndex = 0;
             // 
             // btnCancelar
             // 
             this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancelar.Location = new System.Drawing.Point(157, 59);
+            this.btnCancelar.Location = new System.Drawing.Point(157, 62);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 23);
             this.btnCancelar.TabIndex = 3;
@@ -64,7 +66,7 @@
             // 
             // btnAceptar
             // 
-            this.btnAceptar.Location = new System.Drawing.Point(76, 59);
+            this.btnAceptar.Location = new System.Drawing.Point(76, 62);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(75, 23);
             this.btnAceptar.TabIndex = 2;
@@ -74,7 +76,7 @@
             // 
             // txtInput
             // 
-            this.txtInput.Location = new System.Drawing.Point(24, 25);
+            this.txtInput.Location = new System.Drawing.Point(24, 30);
             this.txtInput.Name = "txtInput";
             this.txtInput.Size = new System.Drawing.Size(260, 20);
             this.txtInput.TabIndex = 1;
@@ -82,7 +84,7 @@
             // lblCaption
             // 
             this.lblCaption.AutoSize = true;
-            this.lblCaption.Location = new System.Drawing.Point(24, 9);
+            this.lblCaption.Location = new System.Drawing.Point(24, 14);
             this.lblCaption.Name = "lblCaption";
             this.lblCaption.Size = new System.Drawing.Size(35, 13);
             this.lblCaption.TabIndex = 0;
@@ -92,13 +94,25 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // bevel1
+            // 
+            this.bevel1.BevelStyle = CustomLibrary.ComponentModel.BevelStyle.Raised;
+            this.bevel1.BevelType = CustomLibrary.ComponentModel.BevelType.Box;
+            this.bevel1.HighlightColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.bevel1.Location = new System.Drawing.Point(12, 7);
+            this.bevel1.Name = "bevel1";
+            this.bevel1.ShadowColor = System.Drawing.SystemColors.ButtonShadow;
+            this.bevel1.Size = new System.Drawing.Size(284, 50);
+            this.bevel1.TabIndex = 1;
+            this.bevel1.Text = "bevel1";
+            // 
             // frmInputBox
             // 
             this.AcceptButton = this.btnAceptar;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancelar;
-            this.ClientSize = new System.Drawing.Size(308, 89);
+            this.ClientSize = new System.Drawing.Size(308, 90);
             this.Controls.Add(this.panel1);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -121,5 +135,6 @@
         private System.Windows.Forms.TextBox txtInput;
         private System.Windows.Forms.Label lblCaption;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        private CustomLibrary.ComponentModel.Bevel bevel1;
     }
 }
