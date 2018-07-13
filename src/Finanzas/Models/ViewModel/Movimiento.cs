@@ -21,6 +21,6 @@ namespace Finanzas.Models.ViewModels
 
         public decimal Importe { get; set; }
 
-        public float Saldo { get; set; }
+        public decimal Saldo { get; set; }
     }
 }

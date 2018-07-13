@@ -5,33 +5,66 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using log4net;
+using System.Reflection;
 
 namespace Finanzas.Repositories
 {
     public static class MovimientosRepository
     {
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
         public static IList<Models.ViewModels.Movimiento> ObtenerMovimientosPorCuenta(int idCuenta)
         {
+            List<Models.ViewModels.Movimiento> movimientos = null;
             using (var db = new GastosEntities())
             {
                 var query = from m in db.Movimientos
                             join t in db.Transacciones on m.IdTransaccion equals t.Id
                             join r in db.Rubros on t.IdRubro equals r.Id
                             where m.IdCuenta == idCuenta
-                            orderby m.FechaMovimiento descending
+                            orderby m.FechaMovimiento ascending
                             select new Models.ViewModels.Movimiento
                             {
                                 Fecha = m.FechaMovimiento,
                                 Rubro = r.Descripcion,
                                 Transacción = t.Descripcion,
                                 Contrasiento = m.EsContrasiento,
-                                Importe = m.Importe,
+                                Importe = t.EsDebito ? -m.Importe : m.Importe,
                                 Saldo = 0,
                                 Id = m.Id
                             };
-                return query.ToList();
+                movimientos = query.ToList();
             }
+            //actualizo el saldo a mostrar
+            var cta = CuentasRepository.ObtenerCuentaPorId(idCuenta);
+            if (cta != null)
+            {
+                var saldoAnterior = cta.SaldoInicial;
+                foreach (var m in movimientos)
+                {
+                    m.Saldo = saldoAnterior + m.Importe;
+                    saldoAnterior = m.Saldo;
+                }
+            }
+
+            Log.Debug("Movimientos:");
+            using (var w = new System.IO.StringWriter())
+            {
+                new System.Xml.Serialization.XmlSerializer(movimientos.GetType()).Serialize(w, movimientos);
+                Log.Debug(w.ToString());
+            }
+            return movimientos;
         }
+
+        //private void Loggear<T>(T obj)
+        //{
+        //    using (var w = new System.IO.StringWriter())
+        //    {
+        //        new System.Xml.Serialization.XmlSerializer(typeof(T)).Serialize(w, obj);
+        //        Log.Debug(w.ToString());
+        //    }
+        //}
 
         public static Movimiento Insertar(int idCuenta, DateTime fecha, int idTransaccion, decimal importe)
         {
