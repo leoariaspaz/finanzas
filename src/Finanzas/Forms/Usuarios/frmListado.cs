@@ -151,7 +151,7 @@ namespace Finanzas.Forms.Usuarios
             if (result == DialogResult.Yes)
             {
                 var id = (int)dgvDatos.Rows[rowindex].Cells[0].Value;
-                UsuariosRepository.ReiniciarContraseña(id);
+                UsuariosRepository.ReiniciarContraseña(id, "123456");
             }
         }
     }

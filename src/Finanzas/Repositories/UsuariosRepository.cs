@@ -76,7 +76,7 @@ namespace Finanzas.Repositories
                     NombreCompleto = nombreCompleto,
                     FechaAlta = Configuration.CurrentDate,
                     Estado = estado,
-                    FechaBaja = estado == 1 ? (DateTime?) null : Configuration.CurrentDate,
+                    FechaBaja = estado == 1 ? (DateTime?)null : Configuration.CurrentDate,
                     Contraseña = HashPassword("123456")
                 };
                 db.Usuarios.Add(usr);
@@ -109,7 +109,7 @@ namespace Finanzas.Repositories
             }
         }
 
-        internal static void ReiniciarContraseña(int id)
+        internal static void ReiniciarContraseña(int id, string contraseña)
         {
             using (var db = new GastosEntities())
             {
@@ -118,9 +118,9 @@ namespace Finanzas.Repositories
                     throw new Exception("No existe el usuario con Id " + id);
                 }
                 var u = db.Usuarios.Find(id);
-                u.Contraseña = HashPassword("123456");
+                u.Contraseña = HashPassword(contraseña);
                 db.SaveChanges();
-            }            
+            }
         }
     }
 
