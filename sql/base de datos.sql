@@ -206,7 +206,7 @@ alter table Movimientos alter column FechaGrabacion	datetime not null
 go
 												  
 CREATE TABLE [dbo].[Usuarios] (
-    [Id]             INT           IDENTITY (1, 1) NOT NULL,
+    [Id]             INT		   NOT NULL,
     [Nombre]         VARCHAR (50)  NOT NULL,
     [Contraseña]     VARCHAR (255) NOT NULL,
     [FechaAlta]      DATETIME      CONSTRAINT [DF_Usuarios_FechaAlta] DEFAULT (getdate()) NOT NULL,
