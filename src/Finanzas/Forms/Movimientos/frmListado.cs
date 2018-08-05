@@ -33,15 +33,18 @@ namespace Finanzas.Forms.Movimientos
             cbCuentas.DataSource = CuentasRepository.ObtenerCuentas().OrderBy(r => r.Descripcion).ToList();
             cbCuentas.DisplayMember = "Descripcion";
             cbCuentas.ValueMember = "Id";
+            dtDesde.Value = DateTime.Today;
+            dtHasta.Value = DateTime.Today.AddMonths(1);
             ConsultarDatos();
         }
 
         private void ConsultarDatos()
         {
-            //dgvDatos.DataSource = MovimientosRepository.ObtenerMovimientosPorCuenta(IdCuenta)
-            //                        .ToSortableBindingList();
-            dgvDatos.SetDataSource(MovimientosRepository.ObtenerMovimientosPorCuenta(IdCuenta));
+            var qry = MovimientosRepository.ObtenerMovimientosPorCuenta(IdCuenta,
+                dtDesde.Value.Date, dtHasta.Value.Date).OrderByDescending(m => m.Fecha);
+            dgvDatos.SetDataSource(qry);
             dgvDatos.Columns[0].Visible = false;
+            dgvDatos.Columns[6].Visible = false;
         }
 
         public int IdCuenta
@@ -59,18 +62,13 @@ namespace Finanzas.Forms.Movimientos
             }
         }
 
-        private void cbCuentas_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            ConsultarDatos();
-        }
-
         private void dgvDatos_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             foreach (DataGridViewColumn c in dgvDatos.Columns)
             {
                 switch (c.Index)
                 {
-                    case 1: 
+                    case 1:
                         c.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
                         break;
                     case 4:
@@ -181,6 +179,11 @@ namespace Finanzas.Forms.Movimientos
             else if (e.Control && e.KeyCode == Keys.N) btnNuevo.PerformClick();
             else if (e.Control && e.KeyCode == Keys.F4) btnEditar.PerformClick();
             else if (e.Control && e.KeyCode == Keys.Delete) btnEliminar.PerformClick();
+        }
+
+        private void btnConsultar_Click(object sender, EventArgs e)
+        {
+            ConsultarDatos();
         }
     }
 }

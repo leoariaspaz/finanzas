@@ -25,7 +25,7 @@ namespace Finanzas.Forms.Movimientos
             this.ShowInTaskbar = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            dtFecha.MaxDate = Configuration.CurrentDate;
+            //dtFecha.MaxDate = Configuration.CurrentDate;
             cbCuentas.Select();
             cbCuentas.DataSource = CuentasRepository.ObtenerCuentas();
             cbCuentas.DisplayMember = "Descripcion";

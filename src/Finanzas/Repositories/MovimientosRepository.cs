@@ -14,7 +14,8 @@ namespace Finanzas.Repositories
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        public static IList<Models.ViewModels.Movimiento> ObtenerMovimientosPorCuenta(int idCuenta)
+        public static IList<Models.ViewModels.Movimiento> ObtenerMovimientosPorCuenta(int idCuenta,
+            DateTime desde, DateTime hasta)
         {
             List<Models.ViewModels.Movimiento> movimientos = null;
             using (var db = new GastosEntities())
@@ -22,7 +23,9 @@ namespace Finanzas.Repositories
                 var query = from m in db.Movimientos
                             join t in db.Transacciones on m.IdTransaccion equals t.Id
                             join r in db.Rubros on t.IdRubro equals r.Id
-                            where m.IdCuenta == idCuenta
+                            where m.IdCuenta == idCuenta &&
+                                    m.FechaMovimiento >= desde &&
+                                    m.FechaMovimiento <= hasta
                             orderby m.FechaMovimiento ascending
                             select new Models.ViewModels.Movimiento
                             {

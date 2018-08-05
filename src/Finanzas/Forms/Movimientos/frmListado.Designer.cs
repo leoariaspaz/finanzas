@@ -37,6 +37,11 @@
             this.btnSalir = new System.Windows.Forms.ToolStripButton();
             this.dgvDatos = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnConsultar = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.dtHasta = new System.Windows.Forms.DateTimePicker();
+            this.dtDesde = new System.Windows.Forms.DateTimePicker();
+            this.label2 = new System.Windows.Forms.Label();
             this.cbCuentas = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
@@ -146,6 +151,11 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.btnConsultar);
+            this.panel1.Controls.Add(this.label3);
+            this.panel1.Controls.Add(this.dtHasta);
+            this.panel1.Controls.Add(this.dtDesde);
+            this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.cbCuentas);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -154,15 +164,62 @@
             this.panel1.Size = new System.Drawing.Size(766, 29);
             this.panel1.TabIndex = 4;
             // 
+            // btnConsultar
+            // 
+            this.btnConsultar.Location = new System.Drawing.Point(602, 3);
+            this.btnConsultar.Name = "btnConsultar";
+            this.btnConsultar.Size = new System.Drawing.Size(75, 23);
+            this.btnConsultar.TabIndex = 6;
+            this.btnConsultar.Text = "Consultar";
+            this.btnConsultar.UseVisualStyleBackColor = true;
+            this.btnConsultar.Click += new System.EventHandler(this.btnConsultar_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(459, 8);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(15, 13);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "al";
+            // 
+            // dtHasta
+            // 
+            this.dtHasta.CustomFormat = "dd/MM/yyyy";
+            this.dtHasta.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtHasta.Location = new System.Drawing.Point(480, 4);
+            this.dtHasta.Name = "dtHasta";
+            this.dtHasta.Size = new System.Drawing.Size(95, 20);
+            this.dtHasta.TabIndex = 4;
+            // 
+            // dtDesde
+            // 
+            this.dtDesde.CustomFormat = "dd/MM/yyyy";
+            this.dtDesde.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtDesde.Location = new System.Drawing.Point(358, 4);
+            this.dtDesde.Name = "dtDesde";
+            this.dtDesde.Size = new System.Drawing.Size(95, 20);
+            this.dtDesde.TabIndex = 3;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(304, 8);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(48, 13);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "Período:";
+            // 
             // cbCuentas
             // 
+            this.cbCuentas.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cbCuentas.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cbCuentas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbCuentas.FormattingEnabled = true;
             this.cbCuentas.Location = new System.Drawing.Point(55, 5);
             this.cbCuentas.Name = "cbCuentas";
             this.cbCuentas.Size = new System.Drawing.Size(215, 21);
             this.cbCuentas.TabIndex = 1;
-            this.cbCuentas.SelectedIndexChanged += new System.EventHandler(this.cbCuentas_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -208,6 +265,11 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ComboBox cbCuentas;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.DateTimePicker dtHasta;
+        private System.Windows.Forms.DateTimePicker dtDesde;
+        private System.Windows.Forms.Button btnConsultar;
     }
 }
 

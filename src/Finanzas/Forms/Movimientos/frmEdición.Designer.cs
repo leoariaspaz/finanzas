@@ -33,6 +33,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnAceptar = new System.Windows.Forms.Button();
+            this.bevel1 = new CustomLibrary.ComponentModel.Bevel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.txtImporte = new CustomLibrary.ComponentModel.NumericTextBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -45,7 +46,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.bevel1 = new CustomLibrary.ComponentModel.Bevel();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -100,6 +100,20 @@
             this.btnAceptar.UseVisualStyleBackColor = true;
             this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
             // 
+            // bevel1
+            // 
+            this.bevel1.BevelStyle = CustomLibrary.ComponentModel.BevelStyle.Raised;
+            this.bevel1.BevelType = CustomLibrary.ComponentModel.BevelType.TopLine;
+            this.bevel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.bevel1.HighlightColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.bevel1.Location = new System.Drawing.Point(0, 0);
+            this.bevel1.Margin = new System.Windows.Forms.Padding(0);
+            this.bevel1.Name = "bevel1";
+            this.bevel1.ShadowColor = System.Drawing.SystemColors.ButtonShadow;
+            this.bevel1.Size = new System.Drawing.Size(390, 23);
+            this.bevel1.TabIndex = 3;
+            this.bevel1.Text = "bevel1";
+            // 
             // panel2
             // 
             this.panel2.Controls.Add(this.txtImporte);
@@ -139,11 +153,14 @@
             // 
             // cbTransacciones
             // 
+            this.cbTransacciones.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cbTransacciones.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cbTransacciones.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbTransacciones.FormattingEnabled = true;
             this.cbTransacciones.Location = new System.Drawing.Point(99, 89);
             this.cbTransacciones.Name = "cbTransacciones";
             this.cbTransacciones.Size = new System.Drawing.Size(261, 21);
+            this.cbTransacciones.Sorted = true;
             this.cbTransacciones.TabIndex = 3;
             // 
             // label4
@@ -157,11 +174,14 @@
             // 
             // cbRubros
             // 
+            this.cbRubros.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cbRubros.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cbRubros.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbRubros.FormattingEnabled = true;
             this.cbRubros.Location = new System.Drawing.Point(99, 62);
             this.cbRubros.Name = "cbRubros";
             this.cbRubros.Size = new System.Drawing.Size(261, 21);
+            this.cbRubros.Sorted = true;
             this.cbRubros.TabIndex = 2;
             this.cbRubros.SelectedIndexChanged += new System.EventHandler(this.cbRubros_SelectedIndexChanged);
             // 
@@ -185,6 +205,8 @@
             // 
             // cbCuentas
             // 
+            this.cbCuentas.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cbCuentas.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cbCuentas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbCuentas.FormattingEnabled = true;
             this.cbCuentas.Location = new System.Drawing.Point(99, 9);
@@ -213,20 +235,6 @@
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
-            // 
-            // bevel1
-            // 
-            this.bevel1.BevelStyle = CustomLibrary.ComponentModel.BevelStyle.Raised;
-            this.bevel1.BevelType = CustomLibrary.ComponentModel.BevelType.TopLine;
-            this.bevel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.bevel1.HighlightColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.bevel1.Location = new System.Drawing.Point(0, 0);
-            this.bevel1.Margin = new System.Windows.Forms.Padding(0);
-            this.bevel1.Name = "bevel1";
-            this.bevel1.ShadowColor = System.Drawing.SystemColors.ButtonShadow;
-            this.bevel1.Size = new System.Drawing.Size(390, 23);
-            this.bevel1.TabIndex = 3;
-            this.bevel1.Text = "bevel1";
             // 
             // frmEdición
             // 
