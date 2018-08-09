@@ -17,6 +17,8 @@ namespace Finanzas.Forms.Movimientos
 {
     public partial class frmListado : Form
     {
+        private SortOrder[] _sortDirections;
+
         public frmListado()
         {
             InitializeComponent();
@@ -43,8 +45,15 @@ namespace Finanzas.Forms.Movimientos
             var qry = MovimientosRepository.ObtenerMovimientosPorCuenta(IdCuenta,
                 dtDesde.Value.Date, dtHasta.Value.Date).OrderByDescending(m => m.Fecha);
             dgvDatos.SetDataSource(qry);
+            //dgvDatos.DataSource = qry.ToList();
             dgvDatos.Columns[0].Visible = false;
             dgvDatos.Columns[6].Visible = false;
+
+            _sortDirections = new SortOrder[dgvDatos.Columns.Count];
+            for (int i = 0; i < dgvDatos.Columns.Count; i++)
+            {
+                _sortDirections[i] = SortOrder.None;
+            }
         }
 
         public int IdCuenta
@@ -184,6 +193,22 @@ namespace Finanzas.Forms.Movimientos
         private void btnConsultar_Click(object sender, EventArgs e)
         {
             ConsultarDatos();
+        }
+
+        private void dgvDatos_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            var item = _sortDirections[e.ColumnIndex];
+            if (item == SortOrder.Ascending)
+            {
+                dgvDatos.Sort(dgvDatos.Columns[e.ColumnIndex], ListSortDirection.Descending);
+                item = SortOrder.Descending;
+            }
+            else
+            {
+                dgvDatos.Sort(dgvDatos.Columns[e.ColumnIndex], ListSortDirection.Ascending);
+                item = SortOrder.Ascending;
+            }
+            _sortDirections[e.ColumnIndex] = item;
         }
     }
 }
