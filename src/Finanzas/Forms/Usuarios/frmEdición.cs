@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Finanzas.Lib.Extensions;
+using CustomLibrary.Lib.Extensions;
 
 namespace Finanzas.Forms.Usuarios
 {

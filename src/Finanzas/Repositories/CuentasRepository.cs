@@ -23,7 +23,7 @@ namespace Finanzas.Repositories
                                         Estado = c.Estado,
                                         SaldoInicial = c.SaldoInicial
                                     });
-                return query.ToList();
+                return query.OrderBy(c => c.Descripcion).ToList();
             }
         }
 

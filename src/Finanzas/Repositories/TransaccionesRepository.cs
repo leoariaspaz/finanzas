@@ -13,7 +13,7 @@ namespace Finanzas.Repositories
         {
             using (var db = new GastosEntities())
             {
-                var qry = from t in db.Transacciones where t.IdRubro == idRubro select t;
+                var qry = from t in db.Transacciones where t.IdRubro == idRubro orderby t.Descripcion select t;
                 return qry.ToList();
             }
         }

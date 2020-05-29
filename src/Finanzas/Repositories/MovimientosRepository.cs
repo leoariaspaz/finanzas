@@ -94,7 +94,7 @@ namespace Finanzas.Repositories
             }
         }
 
-        internal static Movimiento ObtenerMovimientoPorId(decimal idMovimiento)
+        public static Movimiento ObtenerMovimientoPorId(decimal idMovimiento)
         {
             using (var db = new GastosEntities())
             {
@@ -102,7 +102,7 @@ namespace Finanzas.Repositories
             }
         }
 
-        internal static void Actualizar(decimal id, int idCuenta, DateTime fecha, int idTransaccion, decimal importe)
+        public static void Actualizar(decimal id, int idCuenta, DateTime fecha, int idTransaccion, decimal importe)
         {
             using (var db = new GastosEntities())
             {

@@ -160,7 +160,6 @@
             this.cbTransacciones.Location = new System.Drawing.Point(99, 89);
             this.cbTransacciones.Name = "cbTransacciones";
             this.cbTransacciones.Size = new System.Drawing.Size(261, 21);
-            this.cbTransacciones.Sorted = true;
             this.cbTransacciones.TabIndex = 3;
             // 
             // label4
@@ -181,7 +180,6 @@
             this.cbRubros.Location = new System.Drawing.Point(99, 62);
             this.cbRubros.Name = "cbRubros";
             this.cbRubros.Size = new System.Drawing.Size(261, 21);
-            this.cbRubros.Sorted = true;
             this.cbRubros.TabIndex = 2;
             this.cbRubros.SelectedIndexChanged += new System.EventHandler(this.cbRubros_SelectedIndexChanged);
             // 
@@ -267,12 +265,12 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.DateTimePicker dtFecha;
-        private System.Windows.Forms.ComboBox cbTransacciones;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox cbRubros;
         private System.Windows.Forms.Label label3;
         private CustomLibrary.ComponentModel.NumericTextBox txtImporte;
         private System.Windows.Forms.Label label5;
         private CustomLibrary.ComponentModel.Bevel bevel1;
+        public System.Windows.Forms.ComboBox cbTransacciones;
     }
 }

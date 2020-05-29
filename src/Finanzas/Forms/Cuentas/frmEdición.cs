@@ -1,4 +1,5 @@
-﻿using Finanzas.Lib.Extensions;
+﻿using CustomLibrary.Lib.Extensions;
+using Finanzas.Lib.Extensions;
 using Finanzas.Models;
 using System;
 using System.Collections.Generic;
