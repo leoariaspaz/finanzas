@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.Extensions.Configuration;
 
 #nullable disable
 
@@ -9,13 +10,28 @@ namespace Finanzas.Infrastructure.Data
 {
     public partial class GastosContext : DbContext
     {
-        public GastosContext()
+        private readonly string _connectionString;
+
+        public GastosContext() : this("GastosConnection")
         {
         }
 
         public GastosContext(DbContextOptions<GastosContext> options)
             : base(options)
         {
+        }
+
+        public GastosContext(string connectionString)
+        {
+            _connectionString = connectionString;
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlServer(_connectionString);
+            }
         }
 
         public virtual DbSet<Asociaciones> Asociaciones { get; set; }
